@@ -1,0 +1,118 @@
+body {
+    background: linear-gradient(to bottom right, #3b82f6, #8b5cf6); /* Azul e roxo */
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .campo {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: white;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  .stars {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  .star {
+    color: white;
+    transition: color 0.3s;
+  }
+  
+  .star.hovered,
+  .star.selected {
+    color: gold;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: white;
+    color: #3b82f6;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #e5e5ff;
+  }
+  
+  .mensagem {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+
+
+.star {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc; /* cor padrão */
+  transition: color 0.2s ease;
+}
+
+.red {
+  color: #3b82f6;
+}
+.orange {
+  color: #3b82f6;
+}
+.yellow {
+  color: #3b82f6;
+}
+.green {
+  color: #8b5cf6;
+}
+.blue {
+  color: #8b5cf6;
+}
+

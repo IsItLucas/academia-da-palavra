@@ -1,0 +1,6 @@
+node_modules/
+trash/
+
+package-lock.json
+package.json
+.env

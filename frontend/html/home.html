@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<!-- Metadados do Site -->
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Academia da Palavra</title>
+
+	<link rel="stylesheet" href="../css/global.css">
+	<link rel="stylesheet" href="../css/home.css">
+	<link rel="stylesheet" href="../css/lightbox.css">
+
+	<script type="module" src="../js/home.js"></script>
+	<script type="module" src="../js/modules/lightbox.js"></script>
+	<script type="module" src="../js/modules/tema.js"></script>
+
+	<script src="https://kit.fontawesome.com/7525a27d59.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="light-mode">
+	<!-- Cabeçalho do Site -->
+	<header id="header">
+		<div class="header-banner">
+			<div>
+				<img src="../img/logo/symbol.svg" alt="Logo" class="header-logo">
+			</div>
+			<div class="header-texto">
+				<p>Curso de Inglês</p>
+				<h1>ACADEMIA DA PALAVRA</h1>
+			</div>
+		</div>
+		<br>
+		<div class="header-call-to-action">
+			<h1 style="font-size: 48px;">Adquira o Curso Já</h1>
+			<h2 style="font-weight: 200;">e conquiste a fluência com o método que se adapta a você!</h2>
+			<br>
+			<button class="botao-primario" onclick="purchase_request()"><i class="fa-solid fa-cart-shopping"></i> COMPRAR AGORA</button>
+		</div>
+	</header>
+
+	<!-- Menu de Navegação do Site -->
+	<nav>
+		<div class="nav-links">
+			<a href="#section-sobre">Sobre</a>
+			<a href="#section-aulas">Aulas</a>
+			<a href="#section-professor">O Professor</a>
+			<a href="#section-diferenciais">Diferenciais</a>
+			<a href="#section-reviews">Avaliações</a>
+			<a href="#section-curiosidades">Curiosidades</a>
+			<a href="#section-juntese">Junte-se</a>
+			<a href="#section-contato">Contato</a>
+		</div>
+		<div class="nav-tema">
+			<button onclick="alternar_tema()"><i class="fa-solid fa-circle-half-stroke"></i> ALTERNAR TEMA</button>
+		</div>
+	</nav>
+
+	<!-- Conteúdo Principal do Site -->
+	<main>
+		<br>
+		<div class="main-conteudo">
+			<section id="section-sobre">
+				<article class="article" id="about_article">
+					<div class="titulo">
+						<h2><i class="fa-solid fa-circle-info"></i> Sobre o Curso</h2>
+					</div>
+					<div class="conteudo-secao">
+						<img src="../img/promo/woman_01.png" alt="Sobre o Curso" class="promo_image" onclick="abrir_lightbox(this)">
+						<div>
+							<p>Na Academia da Palavra, você aprende inglês de verdade, no seu ritmo e com tecnologia de ponta.</p>
+							<p>Tenha conversas diárias e personalizadas com nossa IA, Dona Marta, que te acompanha e tira dúvidas a qualquer
+								hora.</p>
+							<p>Mergulhe em aulas interativas pré-gravadas onde suas escolhas moldam o aprendizado,
+								tornando cada lição única e envolvente.</p>
+						</div>
+					</div>
+					<strong>Conquiste a fluência com o método que se adapta a você!</strong>
+				</article>
+			</section>
+
+			<section id="section-aulas">
+				<article class="article">
+					<div class="titulo">
+						<h2><i class="fa-solid fa-video"></i> Aula Introdutória</h2>
+					</div>
+					<div class="conteudo-secao">
+						<!-- <img src="../img/promo/thumbnail.png" alt="Aula Introdutória" class="promo_image" onclick="abrir_lightbox(this)"> -->
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/S45kHeWnT0M" title="YouTube video player"
+							frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+						<div>
+							<p>Bem-vindo à Academia da Palavra!</p>
+							<p>Nesta aula introdutória gratuita, você vai dar o primeiro passo para conquistar
+							a fluência em inglês de um jeito que nunca imaginou.</p>
+							<p>Chega de métodos antigos! Esta aula é o convite para você descobrir a leveza
+							e a eficiência de aprender inglês com quem entende de tecnologia e de ensino.</p>
+						</div>
+					</div>
+					<strong>Prepare-se para se surpreender e começar a falar inglês desde já!</strong>
+				</article>
+			</section>
+
+			<section id="section-professor">
+				<article class="article">
+					<div class="titulo">
+						<h2><i class="fa-solid fa-chalkboard-user"></i> Conheça o Professor</h2>
+					</div>
+					<div class="conteudo-secao">
+						<img src="../img/promo/teacher.jpg" alt="Professor" class="promo_image" onclick="abrir_lightbox(this)">
+						<div>
+							<h3>Fábio Lacerda da Silva</h3>
+							<p>Por trás da inovação da Academia da Palavra está o renomado Professor Fábio Lacerda da Silva, um especialista apaixonado
+							por ensinar inglês.</p>
+							<p>Com anos de dedicação e um método didático comprovado, Professor Fábio guia você em cada etapa do aprendizado.</p>
+							<p>Ele não apenas criou as aulas interativas que se adaptam a você, mas também é a mente por trás do feedback inteligente
+							da nossa IA, garantindo que sua jornada rumo à fluência seja eficaz, personalizada e verdadeiramente transformadora.</p>
+							<br>
+						</div>
+					</div>
+					<strong>Aprenda com quem entende de inglês e de você.</strong>
+				</article>
+			</section>
+
+			<section id="section-diferenciais">
+				<article class="article">
+					<h2><i class="fa-solid fa-not-equal"></i> Os Diferenciais do Curso</h2>
+					<div class="diferencial">
+						<div class="titulo-diferencial">
+							<i class="fa-solid fa-robot"></i> <h3>IA Conversacional Diária</h3>
+						</div>
+						<br>
+						<div class="imagem-diferencial">
+							<img src="../img/promo/diferenciais/ia.png" alt="IA Conversacional Diária" onclick="abrir_lightbox(this)">
+							<p>Um sistema de Inteligência Artificial que interage com o aluno em conversas cotidianas, fora do horário de aula,
+							reforçando o aprendizado, tirando dúvidas e praticando o idioma em tempo real. Isso simula uma imersão constante,
+							adaptando-se ao ritmo e às necessidades individuais de cada estudante.</p>
+						</div>
+					</div>
+					<br>
+					<div class="diferencial">
+						<div class="titulo-diferencial">
+							<i class="fa-solid fa-chalkboard-user"></i><h3>Aulas Interativas</h3>
+						</div>
+						<br>
+						<div class="imagem-diferencial">
+							<img src="../img/promo/diferenciais/interatividade.jpg" alt="Aulas Interativas" onclick="abrir_lightbox(this)">
+							<p>As aulas não são passivas. O conteúdo se desenvolve e se altera com base nas decisões e respostas do aluno durante a
+							lição. Isso cria uma experiência de aprendizado dinâmica e personalizada, onde o estudante é o protagonista e suas
+							escolhas influenciam o desenrolar e o aprofundamento dos tópicos.</p>
+						</div>
+					</div>
+					<br>
+					<div class="diferencial">
+						<div class="titulo-diferencial">
+							<i class="fa-solid fa-comments"></i><h3>Feedback Personalizado</h3>
+						</div>
+						<br>
+						<div class="imagem-diferencial">
+							<img src="../img/promo/diferenciais/feedback.png" alt="Feedback Personalizado" onclick="abrir_lightbox(this)">
+							<p>Além da interação com a IA, o aluno tem acesso direto ao Professor Fábio Lacerda da Silva, um nome renomado no ensino de
+							inglês. Ele oferece feedback individualizado sobre o desempenho, acompanha o progresso de perto e está disponível para
+							tirar dúvidas complexas, garantindo um toque humano e a expertise de um especialista em sua jornada de aprendizado.</p>
+						</div>
+					</div>
+				</article>
+			</section>
+
+			<section id="section-reviews">
+				<article class="article">
+					<div class="titulo">
+						<h2><i class="fa-solid fa-star"></i> Nossas Avaliações</h2>
+					</div>
+					<div class="div-reviews carousel-track" id="avaliacoes">
+					</div>
+					<br>
+					<div style="text-align: center;">
+						<button class="big-button"><i class="fa-solid fa-star"></i> AVALIAR CURSO</button>
+					</div>
+				</article>
+			</section>
+
+			<section id="section-curiosidades">
+				<article class="article">
+					<div class="titulo">
+						<h2><i class="fa-solid fa-lightbulb"></i> Curiosidades</h2>
+					</div>
+					<div class="curiosidade">
+						<h3>Na Inglaterra, você dirige do lado “errado” da rua</h3>
+						<div class="imagem-curiosidade">
+							<img src="../img/promo/curiosidades/rua.png" alt="Direção da Inglaterra"
+								onclick="abrir_lightbox(this)">
+							<p>No Reino Unido (e também na Austrália, Japão e Índia), os carros trafegam pela mão inglesa, ou seja, pelo lado esquerdo
+							da via. O volante fica à direita dos veículos. Para quem aprende inglês pensando em viajar, é uma das primeiras
+							curiosidades que chama a atenção — especialmente quando se depara com os clássicos ônibus vermelhos de dois andares nas
+							ruas de Londres!</p>
+						</div>
+					</div>
+					<br>
+					<div class="curiosidade">
+						<h3>Na Austrália, o Natal acontece no verão</h3>
+						<div class="imagem-curiosidade">
+							<img src="../img/promo/curiosidades/natal.png" alt="Natal Praiano da Austrália"
+								onclick="abrir_lightbox(this)">
+							<br>
+							<p>Enquanto os filmes de Natal mostram neve e lareiras, os australianos comemoram a data com churrascos na praia, roupas
+							leves e muito calor. Mesmo com enfeites de neve falsa e canções natalinas tradicionais, a experiência é totalmente
+							diferente.</p>
+						</div>
+					</div>
+					<br>
+					<div class="curiosidade">
+						<h3>O metrô de Londres é o mais antigo do mundo</h3>
+						<div class="imagem-curiosidade">
+							<img src="../img/promo/curiosidades/metro.png" alt="Metrô Antigo de Londres"
+								onclick="abrir_lightbox(this)">
+							<br>
+							<p>O “Tube”, como os britânicos chamam, começou a funcionar em 1863. É uma verdadeira aula de história sob a terra, e
+							também um ótimo lugar para aprender vocabulário de transporte: "Mind the gap", "Oyster card", "Underground", entre
+							outros.</p>
+						</div>
+					</div>
+					<br>
+					<div style="text-align: center;">
+						<p>Essas curiosidades ganham vida quando você entende o que está ao seu redor — e o inglês da é a chave para isso.</p>
+						<strong>Inscreva-se no Academia da Palavra e dê seu primeiro passo rumo ao mundo.</strong>
+					</div>
+				</article>
+			</section>
+
+			<section id="section-juntese">
+				<article class="article" id="joinus_article">
+					<div class="titulo">
+						<h2><i class="fa-solid fa-handshake"></i> Junte-se a Nós</h2>
+					</div>
+					<div class="conteudo-secao">
+						<img src="../img/promo/woman_02.jpg" alt="Sobre o Curso" class="promo_image" onclick="abrir_lightbox(this)">
+						<div>
+							<p>Pronto para finalmente falar inglês com confiança?</p>
+							<p>A Academia da Palavra é a sua chance! Diga adeus aos métodos antigos e mergulhe em uma experiência de aprendizado onde a
+							Inteligência Artificial conversa com você no dia a dia, e aulas interativas se moldam às suas decisões.</p>
+							<p>Com a expertise do Professor Fábio Lacerda da Silva, você não só aprenderá de forma eficiente, como também se manterá
+							motivado e engajado.</p>
+							<br>
+						</div>
+					</div>
+					<br><hr>
+					<div style="text-align: center;">
+					<strong>Não perca mais tempo, inscreva-se na Academia da Palavra hoje e comece a construir a fluência que você sempre sonhou!</strong>
+
+					<br>
+						<button onclick="purchase_request()" class="big-button"><i class="fa-solid fa-cart-shopping"></i> COMPRAR AGORA</button>
+					</div>
+				</article>
+			</section>
+		</div>
+	</main>
+
+	<div id="lightbox" class="lightbox">
+		<span class="fechar" id="fechar" onclick="fechar_lightbox()"> &times; </span>
+		<img class="lightbox-image" id="lightbox-img" src="">
+	</div>
+
+	<!-- Rodapé do Site -->
+	<footer id="footer">
+		<section id="section-contato">
+			<strong>Fale Conosco:</strong>
+			<p>&phone; +55 (31) 98765-4321</p>
+			<p>suporte.curso-academia-da-palavra@edu.com.br</p>
+			<p>R. Paineiras, 1300 - Eldorado, Contagem - MG, 32310-400</p>
+
+			<br>
+			<strong>Academia da Palavra 2025 &copy; Todos os Direitos Reservados</strong>
+		</section>
+	</footer>
+</body>
+
+</html>

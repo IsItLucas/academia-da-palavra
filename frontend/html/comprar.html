@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<!-- Metadados do Site -->
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Processar Compra</title>
+	<link rel="stylesheet" href="../css/global.css">
+	<link rel="stylesheet" href="../css/comprar.css">
+
+	<script type="module" src="../js/comprar.js"></script>
+	<script type="module" src="../js/modules/tema.js"></script>
+
+	<script src="https://kit.fontawesome.com/7525a27d59.js" crossorigin="anonymous"></script>
+</head>
+
+
+<body class="light-mode">
+	<header>
+		<h1><i class="fa-solid fa-cart-shopping"></i> PROCESSAR COMPRA</h1>
+		<button class="botao-secundario" onclick="alternar_tema()"><i class="fa-solid fa-circle-half-stroke"></i> ALTERNAR TEMA</button>
+	</header>
+
+	<!-- Conteúdo Principal do Site -->
+	 <br>
+	<main>
+		<br><br><br>
+		<form action="">
+			<h2><i class="fa-solid fa-address-book"></i> Informações de Contato</h2>
+
+			<label for="nome">Nome Completo:</label>
+			<input type="text" id="nome" required>
+
+			<br>
+
+			<label for="email">Endereço de E-mail:</label>
+			<input type="email" id="email" required>
+
+			<br>
+			
+			<label for="telefone">Telefone:</label>
+			<input type="tel" id="telefone" required>
+
+			<br><br><br>
+
+			<h2><i class="fa-solid fa-money-check-dollar"></i> Informações de Pagamento</h2>
+			
+			<label for="metodo">Método de Pagamento:</label>
+			<select name="metodo" id="metodo" value="pix" required>
+				<option value="pix">Pix</option>
+				<option value="credito">Cartão de Crédito</option>
+				<option value="debito">Cartão de Débito</option>
+				<option value="boleto">Boleto Bancário</option>
+			</select>
+
+			<br>
+			
+			<label for="cpf-cnpj">CPF/CNPJ:</label>
+			<input type="number" id="cpf-cnpj" required>
+			
+			<br><br><br>
+
+			<h2><i class="fa-solid fa-location-dot"></i> Endereço de Cobrança</h2>
+			
+			<div class="double">
+				<div>
+					<label for="pais">País:</label>
+					<select id="pais" required disabled>
+						<option value="">Brasil</option>
+					</select>
+				</div>
+			
+				<div>
+					<label for="estado">Estado:</label>
+					<select id="estado" disabled required>
+						<option value=""></option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="double">
+				<div>
+					<label for="cidade">Cidade:</label>
+					<select id="cidade" disabled required>
+						<option value=""></option>
+					</select>
+				</div>
+			
+				<div>
+					<label for="bairro">Bairro:</label>
+					<input type="text" id="bairro" placeholder="Digite um bairro" autocomplete="off" required>
+				</div>
+			</div>
+			
+			<div class="double">
+				<div>
+					<label for="logradouro">Logradouro:</label>
+					<input type="text" id="logradouro" placeholder="Digite um logradouro" autocomplete="off" required>
+				</div>
+			
+				<div>
+					<label for="numero">Número:</label>
+					<input type="number" id="numero" required>
+				</div>
+			</div>
+			
+			<div class="double">
+				<div>
+					<label for="complemento">Complemento:</label>
+					<input type="text" id="complemento">
+				</div>
+			
+				<div>
+					<label for="cep">CEP:</label>
+					<input type="text" id="cep" maxlength="9" placeholder="00000-000" required>
+				</div>
+			</div>
+
+			<br><hr><br>
+
+			<div class="div-infos">
+				<div class="div-info">
+					<strong>Produto:</strong>
+					<p>Curso de Inglês Academia da Palavra</p>
+				</div>
+				<br>
+				<div class="div-info">
+					<strong>Total:</strong>
+					<p>129,99 R$ / mês</p>
+				</div>
+			</div>
+
+			<br><hr><br><br>
+
+			<div class="div-botao">
+				<button type="submit" onclick="confirmar_compra()"><i class="fa-solid fa-check"></i> FINALIZAR COMPRA</button>
+				<button type="button" class="botao-secundario" onclick="cancel_purchase()"><i class="fa-solid fa-xmark"></i> CANCELAR</button>
+			</div>
+
+			<br><br>
+		</form>
+	</main>
+
+	<br><br>
+	<footer id="footer">
+		<section id="section-contato">
+			<strong>Fale Conosco:</strong>
+			<p>&phone; +55 (31) 98765-4321</p>
+			<p>suporte.curso-academia-da-palavra@edu.com.br</p>
+			<p>R. Paineiras, 1300 - Eldorado, Contagem - MG, 32310-400</p>
+	
+			<br>
+			<strong>Academia da Palavra 2025 &copy; Todos os Direitos Reservados</strong>
+		</section>
+		<br>
+	</footer>
+</body>

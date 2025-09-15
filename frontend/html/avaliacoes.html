@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+
+<!-- Metadados do Site -->
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Avaliação por Estrelas</title>
+	
+	<link rel="stylesheet" href="../css/global.css">
+	<link rel="stylesheet" href="../css/popup.css">
+	<link rel="stylesheet" href="../css/avaliacoes.css">
+
+	<script type="module" src="../js/avaliacoes.js"></script>
+	<script type="module" src="../js/modules/tema.js"></script>
+	<script type="module" src="../js/modules/popup.js"></script>
+</head>
+
+
+<body id="body">
+  <div class="container">
+	<h1>Avalie sua experiência</h1>
+	<form id="form-avaliacao">
+	  <!-- <div class="campo">
+		<label for="nome">Nome:</label>
+		<input type="text" id="nome" name="nome" required />
+	  </div>
+
+	  <div class="campo">
+		<label for="email">E-mail:</label>
+		<input type="email" id="email" name="email" required />
+	  </div> -->
+
+	  <div class="campo">
+		<label>Nota:</label>
+		<div id="estrelas">
+		  <span class="star">&#9733;</span>
+		  <span class="star">&#9733;</span>
+		  <span class="star">&#9733;</span>
+		  <span class="star">&#9733;</span>
+		  <span class="star">&#9733;</span>
+		</div>
+		<input type="hidden" id="satisfacao" name="satisfacao" />
+	  </div>
+
+	  <div class="campo">
+		<label for="comentario">Comentário:</label>
+		<textarea id="comentario" name="comentario" rows="4" placeholder="Escreva seu comentário aqui..."></textarea>
+	  </div>
+
+	  <button type="button" class="botao-secundario" onclick="enviar()">Enviar Avaliação</button>
+	</form>
+
+	<p id="mensagem-sucesso" class="mensagem" style="display: none;">
+	  🎉 Sua avaliação foi enviada com sucesso! Obrigado pelo feedback.
+	</p>
+	
