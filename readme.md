@@ -1,4 +1,4 @@
-# Extensões ---------------------------------------------------------------------
+# Extensões
 - Live Server: ritwickdey.LiveServer
 Hospedar um projeto HTML localmente.
 
@@ -8,14 +8,18 @@ Possibilita a visualização do projeto HTML.
 - Material Icon: PKief.material-icon-theme
 Temas personalizados para pastas e arquivos.
 
-- Code Runner
+- Code Runner: formulahendry.code-runner
 Possibilita a execução de códigos JavaScript dentro do VSCode.
 
-- JavaScript Code Snippets
+- JavaScript Code Snippets: xabikos.JavaScriptSnippets
 Autocomplete para JavaScript.
 
+- GitLens: eamodio.gitlens
 
-# Atalhos ----------------------------------------------------------------------
+- Git History: donjayamanne.githistory
+
+
+# Atalhos
 - <elemento>.<class>#<id>: Cria um elemento com classe e id definidos.
 Exemplo: section.articles#articles
 
@@ -34,7 +38,7 @@ Exemplo: section.articles#articles
 - End: Vai para o final da linha.
 
 
-# Referências -------------------------------------------------------------------
+# Referências
 - https://www.w3schools.com/
 - https://developer.mozilla.org/docs/Web/HTML/
 
