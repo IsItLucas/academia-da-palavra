@@ -48,6 +48,83 @@ export async function obter_enderecos() {
 }
 
 
+export async function setup_database() {
+	const conexao = await db.conectar();
+
+	let query = `
+		CREATE TABLE IF NOT EXISTS contas(
+			id INT PRIMARY KEY AUTO_INCREMENT,
+			email VARCHAR(128) NOT NULL,
+			senha VARCHAR(64) NOT NULL,
+			data_criacao DATE,
+			ativo BOOL DEFAULT TRUE
+		)
+	`;
+	await conexao.execute(query);
+
+	query = `
+		CREATE TABLE IF NOT EXISTS alunos (
+			id INT PRIMARY KEY AUTO_INCREMENT,
+			nome VARCHAR(128) NOT NULL,
+			nascimento DATE,
+			cpf VARCHAR(14),
+			pfp VARCHAR(32),
+			id_conta INT NOT NULL,
+			
+			FOREIGN KEY (id_conta) REFERENCES contas (id)
+		)
+	`;
+	await conexao.execute(query);
+
+	query = `
+		CREATE TABLE IF NOT EXISTS compras (
+			id INT PRIMARY KEY AUTO_INCREMENT,
+			id_conta INT NOT NULL,
+			id_endereco INT NOT NULL,
+			data_efetuacao DATE NOT NULL,
+			metodo ENUM("pix", "credito", "debito", "boleto") NOT NULL,
+			desconto INT DEFAULT 0,
+
+			FOREIGN KEY (id_conta) REFERENCES contas (id)
+		)
+	`;
+	await conexao.execute(query);
+
+	query = `
+		CREATE TABLE IF NOT EXISTS enderecos (
+			id INT PRIMARY KEY AUTO_INCREMENT,
+			id_compra INT NOT NULL,
+			logradouro VARCHAR(128),
+			numero VARCHAR(16),
+			complemento VARCHAR(64),
+			bairro VARCHAR(64),
+			cidade VARCHAR(64),
+			estado CHAR(2),
+			cep CHAR(9),
+			pais VARCHAR(64) DEFAULT "Brasil",
+
+			FOREIGN KEY (id_compra) REFERENCES compras (id)
+		)
+	`;
+	await conexao.execute(query);
+
+	query = `
+		CREATE TABLE IF NOT EXISTS avaliacoes (
+			id INT PRIMARY KEY AUTO_INCREMENT,
+			id_aluno INT NOT NULL,
+			conteudo VARCHAR(512) NOT NULL,
+			nota TINYINT NOT NULL,
+			data_realizacao DATE NOT NULL,
+
+			FOREIGN KEY (id_aluno) REFERENCES alunos (id)
+		)
+	`;
+	await conexao.execute(query);
+
+	await db.desconectar(conexao);
+}
+
+
 async function obter_tabela(tabela) {
 	const conexao = await db.conectar();
 

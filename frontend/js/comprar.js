@@ -1,4 +1,7 @@
+import { IP, PORTA } from "./modules/ip.js";
+
 import * as tema from "./modules/tema.js";
+import * as popup from "./modules/popup.js";
 
 
 window.alternar_tema = tema.alternar_tema;
@@ -21,8 +24,24 @@ function cancel_purchase() {
 }
 
 
-function confirmar_compra() {
-	console.log(get_endereco());
+async function confirmar_compra() {
+	try {
+		const resposta = await fetch(`http://${IP}:${PORTA}/avaliacao`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(get_avaliacao())
+		});
+
+		console.log(resposta)
+		if (!resposta.ok) {
+			throw new Error("Erro ao avaliar curso:\n" + resposta);
+		}
+
+		mostrar_sucesso();
+
+	} catch (err) {
+		mostrar_erro(err);
+	}
 }
 
 
@@ -154,4 +173,24 @@ function get_endereco() {
 	}
 
 	return endereco;
+}
+
+
+function mostrar_erro(err) {
+	const texto_erro = "Falha ao comprar curso!";
+
+	popup.definir_tipo_popup(0);
+	popup.definir_texto_popup("Erro!", texto_erro + "\n\n" + err);
+
+	popup.abrir_popup();
+}
+
+
+function mostrar_sucesso() {
+	const texto_sucesso = "Curso adquirido com sucesso!\n\nA compra foi realizada com sucesso e você já pode acessar as aulas utilizando a sua conta Academia da Palavra.";
+
+	popup.definir_tipo_popup(1);
+	popup.definir_texto_popup("Sucesso!", texto_sucesso);
+
+	popup.abrir_popup();
 }

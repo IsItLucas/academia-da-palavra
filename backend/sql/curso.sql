@@ -8,7 +8,7 @@ USE academia_da_palavra;
 
 -- Tabela de CONTAS
 DROP TABLE IF EXISTS contas;
-CREATE TABLE contas (
+CREATE TABLE IF NOT EXISTS contas (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	email VARCHAR(128) NOT NULL,
 	senha VARCHAR(64) NOT NULL,
