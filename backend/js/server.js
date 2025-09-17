@@ -7,11 +7,11 @@ import * as index from "./index.js";
 import { conectar } from "./database.js";
 
 
-// dotenv.config({
-// 	path: "backend/.env",
-// 	encoding: "utf8",
-// 	debug: true
-// });
+dotenv.config({
+	path: "backend/.env",
+	encoding: "utf8",
+	debug: true
+});
 
 
 const app = express();
@@ -35,6 +35,18 @@ app.post("/avaliacao", async (req, res) => {
 	try {
 		const { id_aluno, conteudo, nota, data_realizacao } = req.body;
 		await index.enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao);
+
+		res.status(200).send("Avaliação enviada com sucesso!");
+	} catch (err) {
+		res.status(500).send(err)
+	}
+});
+
+
+app.post("/avaliacao", async (req, res) => {
+	try {
+		const { id_aluno, conteudo, nota } = req.body;
+		await index.enviar_avaliacao(id_aluno, conteudo, nota);
 
 		res.status(200).send("Avaliação enviada com sucesso!");
 	} catch (err) {
@@ -93,8 +105,6 @@ app.get("/enderecos", async (req, res) => {
 });
 
 
-const PORTA = process.env.SERVER_PORT;
-const IP = process.env.SERVER_IP;
-app.listen(PORTA, () => {
-	console.log(`O servidor está rodando em ${URL}...`);
+app.listen(process.env.SERVER_PORT, () => {
+	console.log(`O servidor está rodando em http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}...`);
 });
