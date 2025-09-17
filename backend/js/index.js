@@ -14,7 +14,9 @@ export async function enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao
 		data_realizacao
 	];
 
-	await conexao.execute(query, parametros);
+	console.log("Executando:", query, parametros);
+
+ 	await conexao.query(query, parametros);
 
 	await db.desconectar(conexao);
 }
