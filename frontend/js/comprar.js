@@ -1,4 +1,5 @@
-import { IP, PORTA } from "./modules/ip.js";
+import { IP, PORTA, URL } from "./modules/ip.js";
+
 
 import * as tema from "./modules/tema.js";
 import * as popup from "./modules/popup.js";
@@ -26,7 +27,7 @@ function cancel_purchase() {
 
 async function confirmar_compra() {
 	try {
-		const resposta = await fetch(`http://${IP}:${PORTA}/avaliacao`, {
+		const resposta = await fetch(`${URL}/avaliacao`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(get_avaliacao())

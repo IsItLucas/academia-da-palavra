@@ -1,4 +1,4 @@
-import { IP, PORTA } from "./modules/ip.js";
+import { IP, PORTA, URL } from "./modules/ip.js";
 
 import * as lightbox from "./modules/lightbox.js";
 import * as paralaxe from "./modules/paralaxe.js";
@@ -39,7 +39,7 @@ async function get_conta_por_id(id) {
 
 
 async function get_alunos() {
-	const resposta = await fetch(`http://${IP}:${PORTA}/alunos`);
+	const resposta = await fetch(`${URL}/alunos`);
 	const resultado = await resposta.json();
 
 	return resultado;
@@ -47,7 +47,7 @@ async function get_alunos() {
 
 
 async function get_contas() {
-	const resposta = await fetch(`http://${IP}:${PORTA}/contas`);
+	const resposta = await fetch(`${URL}/contas`);
 	const resultado = await resposta.json();
 
 	return resultado;
@@ -55,7 +55,7 @@ async function get_contas() {
 
 
 async function get_avaliacoes() {
-	const resposta = await fetch(`http://${IP}:${PORTA}/avaliacoes`);
+	const resposta = await fetch(`${URL}/avaliacoes`);
 	const resultado = await resposta.json();
 
 	return resultado;

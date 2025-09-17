@@ -96,5 +96,5 @@ app.get("/enderecos", async (req, res) => {
 const PORTA = process.env.SERVER_PORT;
 const IP = process.env.SERVER_IP;
 app.listen(PORTA, () => {
-	console.log(`O servidor está rodando em http://${IP}:${PORTA}...`);
+	console.log(`O servidor está rodando em ${URL}...`);
 });

@@ -1,4 +1,4 @@
-import { IP, PORTA } from "./modules/ip.js";
+import { IP, PORTA, URL } from "./modules/ip.js";
 
 import * as popup from "./modules/popup.js";
 import * as tema from "./modules/tema.js";
@@ -19,7 +19,7 @@ function on_load() {
 
 async function enviar() {
 	try {
-		const resposta = await fetch(`http://${IP}:${PORTA}/avaliacao`, {
+		const resposta = await fetch(`${URL}/avaliacao`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(get_avaliacao())
