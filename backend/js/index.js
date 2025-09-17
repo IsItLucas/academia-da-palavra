@@ -2,7 +2,7 @@ import * as db from "./database.js";
 import * as crypt from "./crypt.js";
 
 
-export async function enviar_avaliacao(id_aluno, conteudo, nota) {
+export async function enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao) {
 	const conexao = await db.conectar();
 
 	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota, data_realizacao) VALUES (?, ?, ?, ?)";
@@ -10,11 +10,13 @@ export async function enviar_avaliacao(id_aluno, conteudo, nota) {
 		// id_aluno,
 		1,
 		conteudo,
-		nota,
-		new Date().toISOString().split("T")[0]
+		parseInt(nota, 10),
+		data_realizacao
 	];
 
-	await conexao.execute(query, parametros);
+	console.log("Executando:", query, parametros);
+
+ 	await conexao.query(query, parametros);
 
 	await db.desconectar(conexao);
 }
@@ -45,6 +47,18 @@ export async function obter_compras() {
 
 export async function obter_enderecos() {
 	return await obter_tabela("enderecos");
+}
+
+
+export async function obter_tabela(tabela) {
+	const conexao = await db.conectar();
+
+	const query = "SELECT * FROM " + tabela;
+	const [resultado] = await conexao.execute(query);
+
+	await db.desconectar(conexao);
+
+	return resultado;
 }
 
 
@@ -122,16 +136,4 @@ export async function setup_database() {
 	await conexao.execute(query);
 
 	await db.desconectar(conexao);
-}
-
-
-async function obter_tabela(tabela) {
-	const conexao = await db.conectar();
-
-	const query = "SELECT * FROM " + tabela;
-	const [resultado] = await conexao.execute(query);
-
-	await db.desconectar(conexao);
-
-	return resultado;
 }

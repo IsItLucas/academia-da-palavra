@@ -18,6 +18,7 @@ function on_load() {
 
 
 async function enviar() {
+	console.log(JSON.stringify(get_avaliacao()));
 	try {
 		const resposta = await fetch(`${URL}/avaliacao`, {
 			method: "POST",
@@ -27,7 +28,7 @@ async function enviar() {
 
 		console.log(resposta)
 		if (!resposta.ok) {
-			throw new Error("Erro ao avaliar curso:\n" + resposta);
+			throw new Error(resposta);
 		}
 
 		mostrar_sucesso();
@@ -39,13 +40,16 @@ async function enviar() {
 
 
 function get_avaliacao() {
-	const nota = document.getElementById("satisfacao").value;
+	const nota = parseInt(document.getElementById("satisfacao").value, 10);
 	const conteudo = document.getElementById("comentario").value;
+
+	let date = new Date().toISOString().split("T")[0];
 
 	return {
 		"id_aluno": 1,
 		"conteudo": conteudo,
-		"nota": nota
+		"nota": nota,
+		"data_realizacao": date
 	}
 }
 
@@ -78,7 +82,7 @@ function atualizar_estrelas(nota) {
 
 
 function mostrar_erro(err) {
-	const texto_erro = "Falha ao cadastrar curiosidade!";
+	const texto_erro = "Falha ao avaliar curso!";
 
 	popup.definir_tipo_popup(0);
 	popup.definir_texto_popup("Erro!", texto_erro + "\n\n" + err);

@@ -33,8 +33,8 @@ index.setup_database()
 
 app.post("/avaliacao", async (req, res) => {
 	try {
-		const { id_aluno, conteudo, nota } = req.body;
-		await index.enviar_avaliacao(id_aluno, conteudo, nota);
+		const { id_aluno, conteudo, nota, data_realizacao } = req.body;
+		await index.enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao);
 
 		res.status(200).send("Avaliação enviada com sucesso!");
 	} catch (err) {
