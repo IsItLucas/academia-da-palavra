@@ -1,5 +1,5 @@
 import express from "express";
-import session from "express-session";
+// import session from "express-session";
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -7,25 +7,25 @@ import * as index from "./index.js";
 import { conectar } from "./database.js";
 
 
-dotenv.config({
-	path: "backend/.env",
-	encoding: "utf8",
-	debug: true
-});
+// dotenv.config({
+// 	path: "backend/.env",
+// 	encoding: "utf8",
+// 	debug: true
+// });
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(session({
-	secret: process.env.SESSION_SECRET,
-	resave: false,
-	saveUninitialized: false,
-	cookie: {
-		secure: false,
-		maxAge: 1000 * 60 * 60 * 12 // 12 horas
-	}
-}));
+// app.use(session({
+// 	secret: process.env.SESSION_SECRET,
+// 	resave: false,
+// 	saveUninitialized: false,
+// 	cookie: {
+// 		secure: false,
+// 		maxAge: 1000 * 60 * 60 * 12 // 12 horas
+// 	}
+// }));
 
 
 index.setup_database()
