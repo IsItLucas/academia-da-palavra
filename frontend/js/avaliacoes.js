@@ -40,11 +40,10 @@ async function enviar() {
 
 
 function get_avaliacao() {
-	const nota = document.getElementById("satisfacao").value;
+	const nota = parseInt(document.getElementById("satisfacao").value, 10);
 	const conteudo = document.getElementById("comentario").value;
 
 	let date = new Date().toISOString().split("T")[0];
-	let date_str = String(date);
 
 	return {
 		"id_aluno": 1,

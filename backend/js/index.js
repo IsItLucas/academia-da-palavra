@@ -10,7 +10,7 @@ export async function enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao
 		// id_aluno,
 		1,
 		conteudo,
-		nota,
+		parseInt(nota, 10),
 		data_realizacao
 	];
 
