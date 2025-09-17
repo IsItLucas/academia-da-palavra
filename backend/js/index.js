@@ -2,12 +2,8 @@ import * as db from "./database.js";
 import * as crypt from "./crypt.js";
 
 
-export async function enviar_avaliacao(id_aluno, conteudo, nota) {
+export async function enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao) {
 	const conexao = await db.conectar();
-
-	let date = new Date().toISOString().split("T")[0];
-	let date_str = String(date);
-	console.log(date_str)
 
 	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota, data_realizacao) VALUES (?, ?, ?, ?)";
 	const parametros = [
@@ -15,7 +11,7 @@ export async function enviar_avaliacao(id_aluno, conteudo, nota) {
 		1,
 		conteudo,
 		nota,
-		date_str
+		data_realizacao
 	];
 
 	await conexao.execute(query, parametros);

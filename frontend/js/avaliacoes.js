@@ -18,7 +18,7 @@ function on_load() {
 
 
 async function enviar() {
-	console.log(get_avaliacao());
+	console.log(JSON.stringify(get_avaliacao()));
 	try {
 		const resposta = await fetch(`${URL}/avaliacao`, {
 			method: "POST",
@@ -43,10 +43,14 @@ function get_avaliacao() {
 	const nota = document.getElementById("satisfacao").value;
 	const conteudo = document.getElementById("comentario").value;
 
+	let date = new Date().toISOString().split("T")[0];
+	let date_str = String(date);
+
 	return {
 		"id_aluno": 1,
 		"conteudo": conteudo,
-		"nota": nota
+		"nota": nota,
+		"data_realizacao": date
 	}
 }
 
