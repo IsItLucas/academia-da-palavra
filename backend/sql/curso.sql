@@ -1,6 +1,3 @@
--- SQLBook: Code
--- Active: 1753396469543@@127.0.0.1@3306@academia_da_palavra
-
 DROP DATABASE IF EXISTS academia_da_palavra;
 CREATE DATABASE IF NOT EXISTS academia_da_palavra;
 USE academia_da_palavra;

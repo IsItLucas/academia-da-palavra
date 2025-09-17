@@ -7,6 +7,7 @@ export async function enviar_avaliacao(id_aluno, conteudo, nota) {
 
 	let date = new Date().toISOString().split("T")[0];
 	let date_str = String(date);
+	console.log(date_str)
 
 	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota, data_realizacao) VALUES (?, ?, ?, ?)";
 	const parametros = [
