@@ -36,19 +36,43 @@ app.post("/avaliacao", async (req, res) => {
 		const { id_aluno, conteudo, nota, data_realizacao } = req.body;
 		await index.enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao);
 
-		res.status(200).send("Avaliação enviada com sucesso!");
+		res.status(201).send("Avaliação enviada com sucesso!");
 	} catch (err) {
 		res.status(500).send(err)
 	}
 });
 
 
-app.post("/avaliacao", async (req, res) => {
+app.post("/aluno", async (req, res) => {
 	try {
-		const { id_aluno, conteudo, nota } = req.body;
-		await index.enviar_avaliacao(id_aluno, conteudo, nota);
+		const { nome, cpf, email, senha, nascimento } = req.body;
+		await index.cadastrar_aluno(nome, cpf, email, senha, nascimento);
 
-		res.status(200).send("Avaliação enviada com sucesso!");
+		res.status(201).send("Aluno cadastrado com sucesso!");
+	} catch (err) {
+		res.status(500).send(err)
+	}
+});
+
+
+app.post("/compra", async (req, res) => {
+	try {
+		const { id_aluno, metodo, desconto, data_efetuacao } = req.body;
+		await index.registrar_compra(id_aluno, metodo, desconto, data_efetuacao);
+
+		res.status(201).send("Compra registrada com sucesso!");
+	} catch (err) {
+		res.status(500).send(err)
+	}
+});
+
+
+app.post("/endereco", async (req, res) => {
+	try {
+		const { id_aluno, logradouro, numero, complemento, bairro, cidade, estado, cep, pais } = req.body;
+		await index.cadastrar_endereco(id_aluno, logradouro, numero, complemento, bairro, cidade, estado, cep, pais);
+
+		res.status(201).send("Endereço cadastrado com sucesso!");
 	} catch (err) {
 		res.status(500).send(err)
 	}

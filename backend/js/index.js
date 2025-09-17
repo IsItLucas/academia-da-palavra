@@ -7,17 +7,72 @@ export async function enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao
 
 	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota, data_realizacao) VALUES (?, ?, ?, ?)";
 	const parametros = [
-		// id_aluno,
-		1,
+		id_aluno,
+
 		conteudo,
-		parseInt(nota, 10),
+		nota,
 		data_realizacao
 	];
 
 	console.log("Executando:", query, parametros);
-
  	await conexao.query(query, parametros);
+	await db.desconectar(conexao);
+}
 
+
+export async function cadastrar_aluno(nome, cpf, email, senha, nascimento) {
+	const conexao = await db.conectar();
+
+	const query = "INSERT INTO alunos(nome, cpf, email, senha, nascimento) VALUES (?, ?, ?, ?, ?)";
+	const parametros = [
+		nome,
+		cpf,
+		email,
+		crypt.criptografar(senha),
+		nascimento
+	];
+
+	console.log("Executando:", query, parametros);
+	await conexao.query(query, parametros);
+	await db.desconectar(conexao);
+}
+
+
+export async function registrar_compra(id_aluno, metodo, desconto, data_efetuacao) {
+	const conexao = await db.conectar();
+
+	const query = "INSERT INTO compras(id_aluno, metodo, desconto, data_efetuacao) VALUES (?, ?, ?, ?)";
+	const parametros = [
+		id_aluno,
+		metodo,
+		desconto,
+		data_efetuacao,
+	];
+
+	console.log("Executando:", query, parametros);
+	await conexao.query(query, parametros);
+	await db.desconectar(conexao);
+}
+
+
+export async function cadastrar_endereco(id_aluno, logradouro, numero, complemento, bairro, cidade, estado, cep, pais) {
+	const conexao = await db.conectar();
+
+	const query = "INSERT INTO compras(id_aluno, logradouro, numero, complemento, bairro, cidade, estado, cep, pais) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	const parametros = [
+		id_aluno,
+		logradouro,
+		numero,
+		complemento,
+		bairro,
+		cidade,
+		estado,
+		cep,
+		pais
+	];
+
+	console.log("Executando:", query, parametros);
+	await conexao.query(query, parametros);
 	await db.desconectar(conexao);
 }
 
