@@ -1,0 +1,349 @@
+/* Base */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4fc;
+    color: #052652;
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 36px;
+    color: #052652;
+}
+
+/* Botões no header */
+header button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    font-size: 16px;
+    background-color: #054189;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+header button:hover {
+    background-color: #8d77ab;
+}
+
+/* Navegação */
+nav {
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #69418b;
+}
+
+nav a:hover {
+    color: #a359a0;
+}
+
+/* Botões globais */
+button {
+    margin: 5px;
+    padding: 10px 16px;
+    font-size: 16px;
+    background-color: #3a5dcb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #a359a0;
+}
+
+/* Seções de Aula */
+.lesson {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(5, 38, 82, 0.1);
+    width: 100%;
+    max-width: 700px;
+    margin: 20px 0;
+}
+
+.lesson h2 {
+    color: #054189;
+    font-size: 24px;
+}
+
+.lesson p {
+    margin: 10px 0 20px;
+    line-height: 1.6;
+}
+
+/* Sugestões */
+.suggestions {
+    max-width: 700px;
+    width: 100%;
+    background-color: #e8effd;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.suggestions ul {
+    padding-left: 20px;
+}
+
+.suggestions li {
+    margin-bottom: 10px;
+}
+
+/* Feedback */
+.feedback {
+    max-width: 700px;
+    width: 100%;
+    background-color: #f9faff; /* fundo mais suave */
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* sombra mais moderna */
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* espaçamento uniforme entre elementos */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: transform 0.3s;
+}
+
+.feedback:hover {
+    transform: translateY(-3px); /* leve efeito hover */
+}
+
+.feedback h2 {
+    color: #3cd8d0;
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.feedback p {
+    color: #334466;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+.feedback label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #054189;
+}
+
+/* Inputs e Textarea */
+.feedback input,
+.feedback textarea,
+.feedback select {
+    width: 90%;
+    padding: 14px 12px;
+    margin-bottom: 20px;
+    border: 2px solid #3a5dcb;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    color: #052652;
+}
+
+.feedback input:focus,
+.feedback textarea:focus,
+.feedback select:focus {
+    border-color: #a359a0;
+    box-shadow: 0 0 5px rgba(163, 89, 160, 0.5);
+    outline: none;
+}
+
+/* Select */
+.feedback select {
+    appearance: none; /* remove setas padrões */
+    background: #fff url('data:image/svg+xml;utf8,<svg fill="%233a5dcb" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 20,0 10,10"/></svg>') no-repeat right 12px center;
+    background-size: 12px;
+}
+
+/* Botão */
+.feedback button {
+    padding: 14px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #3a5dcb;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.feedback button:hover {
+    background-color: #a359a0;
+    transform: translateY(-2px);
+}
+
+/* Campo de Data apenas exibido */
+.feedback input[readonly] {
+    background-color: #e8eefc;
+    color: #052652;
+    border: 2px solid #3a5dcb;
+    cursor: not-allowed;
+}
+
+/* Dark Mode */
+.dark-theme .feedback {
+    background-color: #2e2e4d;
+    color: #e0e0f0;
+}
+
+.dark-theme .feedback input,
+.dark-theme .feedback textarea,
+.dark-theme .feedback select {
+    background-color: #1f1f3b;
+    color: #e0e0f0;
+    border: 2px solid #5555aa;
+}
+
+.dark-theme .feedback input[readonly] {
+    background-color: #3b3b5a;
+    color: #e0e0f0;
+}
+
+.dark-theme .feedback button {
+    background-color: #3b3bb8;
+}
+
+.dark-theme .feedback button:hover {
+    background-color: #a359a0;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .feedback {
+        padding: 25px 20px;
+    }
+
+    .feedback h2 {
+        font-size: 24px;
+    }
+
+    .feedback button {
+        font-size: 16px;
+        padding: 12px 0;
+    }
+}
+
+
+/* Lightbox */
+#lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+#lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.fechar {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Dark Mode */
+.dark-theme {
+    background-color: #1a1a2e;
+    color: #e0e0f0;
+}
+
+.dark-theme header h1,
+.dark-theme .lesson h2,
+.dark-theme .feedback label {
+    color: #a6c1ff;
+}
+
+.dark-theme .lesson,
+.dark-theme .feedback,
+.dark-theme .suggestions {
+    background-color: #2e2e4d;
+    color: #e0e0f0;
+}
+
+.dark-theme nav a {
+    color: #d3a4ff;
+}
+
+.dark-theme nav a:hover {
+    color: #ffb6f0;
+}
+
+.dark-theme button,
+.dark-theme header button {
+    background-color: #3b3bb8;
+    color: white;
+}
+
+.dark-theme button:hover,
+.dark-theme header button:hover {
+    background-color: #a359a0;
+}
+
+.dark-theme input,
+.dark-theme textarea {
+    background-color: #1f1f3b;
+    color: white;
+    border: 2px solid #5555aa;
+}
+
+.dark-theme input:focus,
+.dark-theme textarea:focus {
+    border-color: #a359a0;
+    outline: none;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    .lesson h2 {
+        font-size: 20px;
+    }
+}
