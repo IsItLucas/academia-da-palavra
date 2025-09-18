@@ -6,17 +6,17 @@ export function autenticar(req, res, next) {
 	if (req.session.user) {
 		next();
 	} else {
-		res.status(403).send({ erro: "Acesso negado! Faça login primeiro.\n" + req.session.user });
+		res.status(403).send({ erro: "Acesso negado! Faça login primeiro." });
 	}
 }
 
 
-export async function enviar_avaliacao(id_aluno, conteudo, nota) {
+export async function enviar_avaliacao(conteudo, nota) {
 	const conexao = await db.conectar();
 
 	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota) VALUES (?, ?, ?)";
 	const parametros = [
-		id_aluno,
+		req.session.user.id_aluno,
 
 		conteudo,
 		nota

@@ -50,8 +50,8 @@ app.post('/login', async (req, res) => {
 			return;
 		}
 
-		req.session.user = { nome: aluno.nome };
-		res.status(200).send({ mensagem: "Login realizado com sucesso como: " + req.session.user.nome });
+		req.session.user = aluno;
+		res.status(200).send({ mensagem: "Login realizado com sucesso como:" + req.session.user });
 	} catch (err) {
 		res.status(500).send(err)
 	}
