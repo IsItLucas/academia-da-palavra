@@ -45,6 +45,9 @@ app.post('/login', async (req, res) => {
 			return;
 		}
 
+		console.log("Senha Inserida: " + senha);
+		console.log("Senha DB: " + aluno.senha);
+		console.log("Correto? " + await crypt.descriptografar(senha, aluno.senha))
 		if (!await crypt.descriptografar(senha, aluno.senha)) {
 			res.status(401).send({ erro: "Credenciais inválidas" });
 			return;
