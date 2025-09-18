@@ -24,7 +24,7 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false,
 	cookie: {
-		secure: true,
+		secure: false,
 		maxAge: 1000 * 60 * 60 * 24 // 24 horas
 	}
 }));
@@ -51,7 +51,7 @@ app.post('/login', async (req, res) => {
 		}
 
 		req.session.user = { nome: aluno.nome };
-		res.status(200).send({ mensagem: "Login realizado com sucesso como" + req.session.user.nome });
+		res.status(200).send({ mensagem: "Login realizado com sucesso como: " + req.session.user.nome });
 	} catch (err) {
 		res.status(500).send(err)
 	}

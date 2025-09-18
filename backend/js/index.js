@@ -6,7 +6,7 @@ export function autenticar(req, res, next) {
 	if (req.session.user) {
 		next();
 	} else {
-		res.status(403).send({ erro: "Acesso negado! Faça login primeiro." });
+		res.status(403).send({ erro: "Acesso negado! Faça login primeiro.\n" + req.session.user });
 	}
 }
 
