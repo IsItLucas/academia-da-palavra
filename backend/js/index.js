@@ -107,6 +107,18 @@ export async function cadastrar_endereco(id_aluno, logradouro, numero, complemen
 }
 
 
+export async function get_usuario_por_email(email) {
+	const conexao = await db.conectar();
+
+	const query = "SELECT * FROM alunos WHERE email = ?";
+	const [resultado] = await conexao.execute(query, [email]);
+
+	await db.desconectar(conexao);
+
+	return resultado;
+}
+
+
 export async function obter_avaliacoes() {
 	return await obter_tabela("avaliacoes");
 }
