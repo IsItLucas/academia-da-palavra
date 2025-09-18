@@ -54,8 +54,11 @@ O projeto visa:
 
 ### Hospedagem
 
-Frontend: 
-BacKend: 
+- Frontend:https://github.com/
+
+- BacKend:https://railway.com/
+
+- Site: https://isitlucas.github.io/academia-da-palavra/frontend/html/home.html
 
 ---
 
@@ -89,7 +92,38 @@ Banco de Dados (MySQL)
    ↑
 Resposta para o Frontend (JSON ou redirecionamento)
 
+------------------
+
 📁 2. Estrutura do Projeto
+
+
+
+flowchart TD
+    subgraph Client["Usuário / Navegador"]
+        Browser["🌐 Navegador (HTML, CSS, JS)"]
+    end
+
+    subgraph Frontend["Frontend (GitHub Pages)"]
+        Pages["GitHub Pages (HTML + CSS + JS)"]
+    end
+
+    subgraph Backend["Backend (Railway - Node.js + Express)"]
+        API["API REST (server.js)"]
+    end
+
+    subgraph Database["Banco de Dados (MySQL - Railway)"]
+        DB[("MySQL Database")]
+    end
+
+    %% Conexões
+    Browser -->|"HTTP/HTTPS Request"| Pages
+    Pages -->|"Fetch API / HTTP"| API
+    API -->|"SQL Queries"| DB
+    DB -->|"Resultados SQL"| API
+    API -->|"JSON Response"| Pages
+
+
+---------
 
 academia-da-palavra/
 │
@@ -120,6 +154,7 @@ academia-da-palavra/
 ├── package.json
 └── .gitignore
 
+--------------
 
 🔄 Diagrama de Sequência – Fluxo de Requisição
 
@@ -147,6 +182,7 @@ sequenceDiagram
     BE-->>FE: JSON com avaliações
     FE-->>U: Renderiza reviews na seção "Nossas Avaliações"
 
+------------
 
 3️⃣ Clonar ou baixar o código
 
@@ -161,6 +197,7 @@ Se não estiver no GitHub, apenas copie a pasta academia-da-palavra para sua má
 cd backend
 npm install
 
+---------------
 
 4️⃣ Configurar variáveis de ambiente no backend
 
@@ -175,6 +212,7 @@ DB_DATABASE=academia_da_palavra
 SERVER_PORT=3000
 SERVER_IP=127.0.0.1
 
+--------------
 
 5️⃣ Testar conexão via Node.js
 
@@ -182,6 +220,7 @@ Na pasta backend:
 
 npm start
 
+---------------
 
 6️⃣ Testar conexão via Node.js
 
@@ -200,7 +239,7 @@ Exibe no terminal:
 
 O servidor está rodando em http://127.0.0.1:3000...
 
-
+-----------------------
 
 # Extensões
 - Live Server: ritwickdey.LiveServer
