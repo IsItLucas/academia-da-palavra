@@ -2,10 +2,10 @@ import * as db from "./database.js";
 import * as crypt from "./crypt.js";
 
 
-export async function enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao) {
+export async function enviar_avaliacao(id_aluno, conteudo, nota) {
 	const conexao = await db.conectar();
 
-	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota, data_realizacao) VALUES (?, ?, ?, ?)";
+	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota) VALUES (?, ?, ?)";
 	const parametros = [
 		id_aluno,
 
@@ -38,10 +38,10 @@ export async function cadastrar_aluno(nome, cpf, email, senha, nascimento) {
 }
 
 
-export async function registrar_compra(id_aluno, metodo, desconto, data_efetuacao) {
+export async function registrar_compra(id_aluno, metodo, desconto) {
 	const conexao = await db.conectar();
 
-	const query = "INSERT INTO compras(id_aluno, metodo, desconto, data_efetuacao) VALUES (?, ?, ?, ?)";
+	const query = "INSERT INTO compras(id_aluno, metodo, desconto) VALUES (?, ?, ?)";
 	const parametros = [
 		id_aluno,
 		metodo,
@@ -121,7 +121,7 @@ export async function setup_database() {
 	const conexao = await db.conectar();
 
 	await conexao.execute(`SET FOREIGN_KEY_CHECKS = 0;`);
-	await conexao.execute(`DROP TABLE IF EXISTS endereços`);
+	await conexao.execute(`DROP TABLE IF EXISTS enderecos`);
 	await conexao.execute(`DROP TABLE IF EXISTS compras`);
 	await conexao.execute(`DROP TABLE IF EXISTS avaliacoes`);
 	await conexao.execute(`DROP TABLE IF EXISTS alunos`);
