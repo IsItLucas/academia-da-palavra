@@ -1,61 +1,91 @@
-/* aulas.css */
+/* aulas.css - versão leve e atrativa */
 
+/* ============================
+   Configurações base
+============================ */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f4fc;
-  color: #052652;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(120deg, #f0f4fc, #e8f0ff);
+  color: #1b1b38;
   padding: 20px;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
+/* ============================
+   Navegação
+============================ */
 nav {
   align-self: flex-start;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 nav a {
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
   color: #69418b;
   font-size: 16px;
+  margin-right: 20px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 nav a:hover {
+  background-color: #f4e6ff;
   color: #a359a0;
+  transform: translateY(-2px);
 }
 
+/* ============================
+   Título
+============================ */
 h1 {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 2.8rem;
+  margin-bottom: 30px;
   text-align: center;
-  color: #052652;
+  color: #1b1b38;
+  letter-spacing: 1px;
 }
 
+/* ============================
+   Botões
+============================ */
 button {
-  padding: 10px 16px;
-  font-size: 14px;
-  background-color: #3a5dcb;
-  color: white;
+  padding: 12px 25px;
+  font-size: 15px;
+  background: linear-gradient(135deg, #3a5dcb, #6a7cff);
+  color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #a359a0;
+  background: linear-gradient(135deg, #6a4ca0, #a359a0);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
 
-/* Video Responsivo */
+/* ============================
+   Container de vídeo responsivo
+============================ */
 .video-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   position: relative;
   padding-top: 56.25%; /* 16:9 */
+  margin-bottom: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .video-container video {
@@ -64,13 +94,86 @@ button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
 }
 
-/* Modo escuro */
+.video-container video:hover {
+  transform: scale(1.03);
+}
+
+/* ============================
+   Container de atividades
+============================ */
+#atividades-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.atividade {
+  background: #ffffff;
+  padding: 18px 22px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.atividade:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.atividade input {
+  width: 95%;
+  padding: 12px;
+  margin-top: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.atividade input:focus {
+  border-color: #3a5dcb;
+  outline: none;
+  background-color: #f6f8ff;
+}
+
+/* ============================
+   Resultado das respostas
+============================ */
+#resultado {
+  margin-top: 25px;
+  max-width: 900px;
+  width: 100%;
+  font-size: 16px;
+  padding: 15px;
+  background: #f7f9ff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+#resultado p.correto {
+  color: green;
+  font-weight: bold;
+}
+
+#resultado p.incorreto {
+  color: red;
+  font-weight: bold;
+}
+
+
+/* ============================
+   Modo escuro leve
+============================ */
 .dark-theme {
-  background-color: #1a1a2e;
+  background: linear-gradient(120deg, #1a1a2e, #222244);
   color: #e0e0f0;
 }
 
@@ -78,18 +181,35 @@ button:hover {
   color: #a6c1ff;
 }
 
-.dark-theme button {
-  background-color: #3b3bb8;
-}
-
-.dark-theme button:hover {
-  background-color: #a359a0;
-}
-
 .dark-theme nav a {
   color: #d3a4ff;
 }
 
 .dark-theme nav a:hover {
+  background-color: #3a2a5a;
   color: #ffb6f0;
+}
+
+.dark-theme button {
+  background: linear-gradient(135deg, #3b3bb8, #5a5acf);
+}
+
+.dark-theme button:hover {
+  background: linear-gradient(135deg, #6a4ca0, #a359a0);
+}
+
+.dark-theme .atividade {
+  background-color: #2a2a45;
+  color: #e0e0f0;
+}
+
+.dark-theme .atividade input {
+  background-color: #3a3a5a;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark-theme #resultado {
+  background-color: #26264a;
+  color: #f0f0ff;
 }

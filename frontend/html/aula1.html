@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Player de Vídeo Responsivo</title>
   <link rel="stylesheet" href="../css/aulas.css">
+  <script defer src="../js/aula.js"></script>
 </head>
+
 <body>
 
   <nav><a href="zona_de_aulas.html">&larr; Voltar para aulas</a></nav>
@@ -14,11 +17,20 @@
   <button onclick="alternar_tema()">🌗 Alternar o tema</button>
 
   <div class="video-container">
-    <video controls>
-      <source src="video.mp4" type="video/mp4">
+    <video controls width="100%" height="auto">
+      <source src="aula1.mp4" type="video/mp4">
       Seu navegador não suporta o elemento de vídeo.
     </video>
   </div>
+
+  <!-- Seção de Exercícios -->
+  <section id="atividades-container" data-aula="1">
+    <p>Carregando atividades...</p>
+  </section>
+
+  <!-- Resultado das respostas -->
+  <section id="resultado"></section>
+
 
   <script>
     function alternar_tema() {
@@ -27,4 +39,5 @@
   </script>
 
 </body>
+
 </html>
