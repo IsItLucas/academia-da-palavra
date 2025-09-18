@@ -1,8 +1,11 @@
 import { IP, PORTA, URL } from "./modules/ip.js";
 
+import * as popup from "./modules/popup.js";
 import * as lightbox from "./modules/lightbox.js";
 import * as tema from "./modules/tema.js";
 
+
+window.cadastrar_aluno = cadastrar_aluno;
 
 window.abrir_lightbox = lightbox.abrir_lightbox;
 window.fechar_lightbox = lightbox.fechar_lightbox;
@@ -24,9 +27,7 @@ async function on_load() {
 }
 
 
-async function cadastrar_aluno(event) {
-	event.preventDefault();
-
+async function cadastrar_aluno() {
 	const mensagensExistentes = form.querySelectorAll('.mensagem');
 	mensagensExistentes.forEach(msg => msg.remove());
 
@@ -52,26 +53,32 @@ async function cadastrar_aluno(event) {
 			body: JSON.stringify(usuario)
 		});
 
-		if (!resposta.ok) throw new Error("Erro ao cadastrar usuário: " + resposta);
+		if (!resposta.ok) {
+			throw new Error(resposta);
+		}
 
-		let mensagem = document.createElement('p');
-		mensagem.textContent = "Usuário cadastrado e será matriculado no curso...";
-		mensagem.classList.add('mensagem');
-		mensagem.style.marginTop = "20px";
-		mensagem.style.fontWeight = "bold";
-		mensagem.style.color = "#00796b";
-		form.appendChild(mensagem);
-
-		form.querySelector('button[type="submit"]').disabled = true;
-
-		setTimeout(() => {
-			window.location.href = "login.html";
-		}, 3000);
-
-		form.reset();
-
+		mostrar_sucesso();
 	} catch (erro) {
-		console.error(erro);
-		alert("Falha ao cadastrar usuário: " + erro);
+		mostrar_erro(erro);
 	}
+}
+
+
+function mostrar_erro(err) {
+	const texto_erro = "Falha ao criar conta Academia da Palavra:";
+
+	popup.definir_tipo_popup(0);
+	popup.definir_texto_popup("Erro!", texto_erro + "\n\n" + err);
+
+	popup.abrir_popup();
+}
+
+
+function mostrar_sucesso() {
+	const texto_sucesso = "Conta criada com sucesso!\n\nSua conta Academia da Palavra foi criada com sucesso.\nPara começar a usar o serviço, faça login primeiro.";
+
+	popup.definir_tipo_popup(1);
+	popup.definir_texto_popup("Sucesso!", texto_sucesso);
+
+	popup.abrir_popup();
 }

@@ -1,9 +1,11 @@
 import express from "express";
-// import session from "express-session";
+import session from "express-session";
 import cors from "cors";
 import dotenv from "dotenv";
 
 import * as index from "./index.js";
+import * as crypt from "./crypt.js";
+
 import { conectar } from "./database.js";
 
 
@@ -17,18 +19,52 @@ dotenv.config({
 const app = express();
 app.use(cors());
 app.use(express.json());
-// app.use(session({
-// 	secret: process.env.SESSION_SECRET,
-// 	resave: false,
-// 	saveUninitialized: false,
-// 	cookie: {
-// 		secure: false,
-// 		maxAge: 1000 * 60 * 60 * 12 // 12 horas
-// 	}
-// }));
+app.use(session({
+	secret: process.env.SESSION_SECRET,
+	resave: false,
+	saveUninitialized: false,
+	cookie: {
+		secure: false,
+		maxAge: 1000 * 60 * 60 * 12 // 12 horas
+	}
+}));
 
 
 index.setup_database()
+
+
+app.post('/login', async (req, res) => {
+	const { email, senha } = req.body;
+
+	try {
+		const alunos = index.obter_alunos();
+
+		const aluno = alunos.find(a => a.email === email);
+		if (!aluno) {
+			res.status(401).send({ erro: "Credenciais inválidas" });
+		}
+
+		if (!await crypt.descriptografar(senha, aluno.senha)) {
+			res.status(401).send({ erro: "Credenciais inválidas" });
+		}
+
+		req.session.user = { nome: aluno.nome };
+		res.status(200).send({ mensagem: "Login realizado com sucesso!" });
+	} catch (err) {
+		res.status(500).send(err)
+	}
+});
+
+
+app.get('/dashboard', index.autenticar, (req, res) => {
+	res.status(200).send(`Bem-vindo, ${req.session.user.nome}!`);
+});
+
+
+app.get('/logout', (req, res) => {
+	req.session.destroy();
+	res.status(200).send({ mensagem: "Sessão encerrada com sucesso!" });
+});
 
 
 app.post("/avaliacao", async (req, res) => {

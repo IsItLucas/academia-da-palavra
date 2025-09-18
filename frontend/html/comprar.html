@@ -6,7 +6,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
 	<title>Processar Compra</title>
+
 	<link rel="stylesheet" href="../css/global.css">
 	<link rel="stylesheet" href="../css/popup.css">
 	<link rel="stylesheet" href="../css/comprar.css">
@@ -19,16 +21,15 @@
 </head>
 
 
-<body class="light-mode">
+<body id="body">
 	<header>
 		<h1><i class="fa-solid fa-cart-shopping"></i> PROCESSAR COMPRA</h1>
 		<button class="botao-secundario" onclick="alternar_tema()"><i class="fa-solid fa-circle-half-stroke"></i> ALTERNAR TEMA</button>
 	</header>
 
 	<!-- Conteúdo Principal do Site -->
-	 <br>
+	<br>
 	<main>
-		<br><br><br>
 		<form action="">
 			<h2><i class="fa-solid fa-address-book"></i> Informações de Contato</h2>
 
@@ -140,8 +141,6 @@
 				<button type="button" onclick="confirmar_compra()"><i class="fa-solid fa-check"></i> FINALIZAR COMPRA</button>
 				<button type="button" class="botao-secundario" onclick="cancel_purchase()"><i class="fa-solid fa-xmark"></i> CANCELAR</button>
 			</div>
-
-			<br><br>
 		</form>
 	</main>
 

@@ -2,6 +2,15 @@ import * as db from "./database.js";
 import * as crypt from "./crypt.js";
 
 
+export function autenticar(req, res, next) {
+	if (req.session.user) {
+		next();
+	} else {
+		res.status(403).send({ erro: "Acesso negado! Faça login primeiro." });
+	}
+}
+
+
 export async function enviar_avaliacao(id_aluno, conteudo, nota) {
 	const conexao = await db.conectar();
 
@@ -130,7 +139,7 @@ export async function setup_database() {
         CREATE TABLE IF NOT EXISTS alunos (
             id INT PRIMARY KEY AUTO_INCREMENT,
             email VARCHAR(128) NOT NULL UNIQUE,
-            senha VARCHAR(250) NOT NULL,
+            senha TEXT NOT NULL,
             nome VARCHAR(128) NOT NULL,
             cpf VARCHAR(14),
             nascimento DATE,
