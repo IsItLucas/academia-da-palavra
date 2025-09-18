@@ -1,103 +1,77 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('form-cadastro');
-    const senha = document.getElementById('senha');
-    const confirmarSenha = document.getElementById('confirmar-senha');
-    const toggleDarkBtn = document.getElementById('toggle-dark-mode');
-    const body = document.body;
-    const selectCurso = document.getElementById('curso');
+import { IP, PORTA, URL } from "./modules/ip.js";
 
-    // --- Carregar cursos dinamicamente ---
-    async function carregarCursos() {
-        try {
-            const resposta = await fetch("http://localhost:3000/cursos");
-            const cursos = await resposta.json();
+import * as lightbox from "./modules/lightbox.js";
+import * as tema from "./modules/tema.js";
 
-            cursos.forEach(curso => {
-                const option = document.createElement('option');
-                option.value = curso.id;
-                option.textContent = curso.nome;
-                selectCurso.appendChild(option);
-            });
-        } catch (erro) {
-            console.error("Erro ao carregar cursos:", erro);
-        }
-    }
 
-    carregarCursos();
+window.abrir_lightbox = lightbox.abrir_lightbox;
+window.fechar_lightbox = lightbox.fechar_lightbox;
+window.alternar_tema = tema.alternar_tema;
 
-    // --- Função de cadastro de usuário ---
-    async function cadastrarUsuario(event) {
-        event.preventDefault();
 
-        // Limpar mensagens antigas
-        const mensagensExistentes = form.querySelectorAll('.mensagem');
-        mensagensExistentes.forEach(msg => msg.remove());
+window.addEventListener("DOMContentLoaded", on_load);
 
-        if (senha.value !== confirmarSenha.value) {
-            alert("As senhas não coincidem!");
-            confirmarSenha.focus();
-            return;
-        }
 
-        if (selectCurso.value === "") {
-            alert("Por favor, selecione um curso!");
-            selectCurso.focus();
-            return;
-        }
+const body = document.body;
 
-        const usuario = {
-            nome: document.getElementById('nome').value,
-            email: document.getElementById('email').value,
-            data_nascimento: document.getElementById('data-nascimento').value,
-            senha: senha.value,
-            id_curso: selectCurso.value
-        };
+const form = document.getElementById('form-cadastro');
+const senha = document.getElementById('senha');
+const confirmarSenha = document.getElementById('confirmar-senha');
 
-        try {
-            const resposta = await fetch("http://localhost:3000/aluno", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(usuario)
-            });
 
-            if (!resposta.ok) throw new Error("Erro ao cadastrar usuário");
+async function on_load() {
+	console.log("JS funcionando");
+}
 
-            // Mensagem de verificação
-            let mensagem = document.createElement('p');
-            mensagem.textContent = "Usuário cadastrado e será matriculado no curso...";
-            mensagem.classList.add('mensagem');
-            mensagem.style.marginTop = "20px";
-            mensagem.style.fontWeight = "bold";
-            mensagem.style.color = "#00796b";
-            form.appendChild(mensagem);
 
-            // Desabilitar botão
-            form.querySelector('button[type="submit"]').disabled = true;
+async function cadastrar_aluno(event) {
+	event.preventDefault();
 
-            // Redirecionar após 3 segundos
-            setTimeout(() => {
-                window.location.href = "login.html";
-            }, 3000);
+	const mensagensExistentes = form.querySelectorAll('.mensagem');
+	mensagensExistentes.forEach(msg => msg.remove());
 
-            // Limpar formulário
-            form.reset();
+	if (senha.value !== confirmarSenha.value) {
+		alert("As senhas não coincidem!");
+		confirmarSenha.focus();
 
-        } catch (erro) {
-            console.error(erro);
-            alert("Falha ao cadastrar usuário.");
-        }
-    }
+		return;
+	}
 
-    // --- Submeter formulário ---
-    form.addEventListener('submit', cadastrarUsuario);
+	const usuario = {
+		nome: document.getElementById('nome').value,
+		cpf: document.getElementById('cpf').value,
+		email: document.getElementById('email').value,
+		nascimento: document.getElementById('data-nascimento').value,
+		senha: senha.value,
+	};
 
-    // --- Modo Escuro ---
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-    }
+	try {
+		const resposta = await fetch(`${URL}/aluno`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(usuario)
+		});
 
-    toggleDarkBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        localStorage.setItem('darkMode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-    });
-});
+		if (!resposta.ok) throw new Error("Erro ao cadastrar usuário: " + resposta);
+
+		let mensagem = document.createElement('p');
+		mensagem.textContent = "Usuário cadastrado e será matriculado no curso...";
+		mensagem.classList.add('mensagem');
+		mensagem.style.marginTop = "20px";
+		mensagem.style.fontWeight = "bold";
+		mensagem.style.color = "#00796b";
+		form.appendChild(mensagem);
+
+		form.querySelector('button[type="submit"]').disabled = true;
+
+		setTimeout(() => {
+			window.location.href = "login.html";
+		}, 3000);
+
+		form.reset();
+
+	} catch (erro) {
+		console.error(erro);
+		alert("Falha ao cadastrar usuário: " + erro);
+	}
+}
