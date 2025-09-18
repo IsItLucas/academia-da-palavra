@@ -120,13 +120,12 @@ export async function obter_tabela(tabela) {
 export async function setup_database() {
 	const conexao = await db.conectar();
 
-	// await conexao.execute(`DROP TABLE IF EXISTS endereços`);
-	// await conexao.execute(`DROP TABLE IF EXISTS compras`);
-	// await conexao.execute(`DROP TABLE IF EXISTS avaliacoes`);
-	// await conexao.execute(`DROP TABLE IF EXISTS alunos`);
-	await conexao.execute(`DROP TABLE IF EXISTS railway`);
-	await conexao.execute(`CREATE TABLE railway`);
-	await conexao.execute(`USE railway`);
+	await conexao.execute(`SET FOREIGN_KEY_CHECKS = 0;`);
+	await conexao.execute(`DROP TABLE IF EXISTS endereços`);
+	await conexao.execute(`DROP TABLE IF EXISTS compras`);
+	await conexao.execute(`DROP TABLE IF EXISTS avaliacoes`);
+	await conexao.execute(`DROP TABLE IF EXISTS alunos`);
+	await conexao.execute(`SET FOREIGN_KEY_CHECKS = 1;`);
 
 	// Tabela alunos
 	await conexao.execute(`
