@@ -11,16 +11,22 @@ export function autenticar_login(req, res, next) {
 }
 
 
-export function autenticar_compra(req, res, next) {
+export async function autenticar_compra(req, res, next) {
 	if (!req.session.user) {
 		res.status(403).send({ erro: "Acesso negado! Faça login primeiro." });
 		return;
 	}
 
-	const compras = obter_compras();
-	const compra = compras.find(a => a.id_aluno === req.session.user.id);
+	const conexao = await db.conectar();
 
-	if (compra) {
+	const [compras] = await conexao.query(
+		"SELECT * FROM compras WHERE id_aluno = ?",
+		[req.session.user.id]
+	);
+
+	await db.desconectar(conexao);
+
+	if (compras.length > 0) {
 		next();
 	} else {
 		res.status(403).send({ erro: "Acesso negado! Adquira o curso primeiro." });
