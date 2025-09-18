@@ -19,10 +19,12 @@ dotenv.config({
 const app = express();
 
 app.use(cors({
-	origin: "http://localhost:3000", // endereço do frontend
-	credentials: true                // permite enviar cookies
+	origin: [
+		"http://localhost:3000",   // React/Vite local
+		"http://127.0.0.1:5500"   // Live Server / HTML puro
+	],
+	credentials: true
 }));
-
 app.use(express.json());
 
 app.use(session({
