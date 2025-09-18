@@ -183,5 +183,5 @@ app.get("/enderecos", async (req, res) => {
 
 
 app.listen(process.env.SERVER_PORT, () => {
-	console.log(`O servidor está rodando em http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}...`);
+	console.log(`O servidor está rodando em http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}...  ${process.env.FRONTEND_URL}`);
 });
