@@ -42,10 +42,12 @@ app.post('/login', async (req, res) => {
 		const aluno = alunos.find(a => a.email === email);
 		if (!aluno) {
 			res.status(401).send({ erro: "Credenciais inválidas" });
+			return;
 		}
 
 		if (!await crypt.descriptografar(senha, aluno.senha)) {
 			res.status(401).send({ erro: "Credenciais inválidas" });
+			return;
 		}
 
 		req.session.user = { nome: aluno.nome };
