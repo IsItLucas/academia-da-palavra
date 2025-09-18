@@ -59,8 +59,10 @@ async function confirmar_compra() {
 
 
 async function get_compra() {
+	const usuario = await get_usuario();
+
 	return {
-		"id_aluno": await get_usuario().user.id,
+		"id_aluno": usuario.user.id,
 		"metodo": document.getElementById("metodo").value,
 		"desconto": 0,
 	}
@@ -86,13 +88,15 @@ async function get_endereco() {
 		endereco[id] = valor;
 	}
 
-	endereco["id_aluno"] = await get_usuario().user.id;
+	const usuario = await get_usuario();
+	endereco["id_aluno"] = usuario.user.id;
 
 	return endereco;
 }
 
 
 async function get_usuario() {
+	console.log(document.cookie)
 	const res = await fetch(`${URL}/me`, {
 		credentials: "include" // envia cookie de sessão
 	});

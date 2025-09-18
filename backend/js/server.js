@@ -18,13 +18,7 @@ dotenv.config({
 
 const app = express();
 
-app.use(cors({
-	origin: [
-		"http://localhost:3000",   // React/Vite local
-		"http://127.0.0.1:5500"   // Live Server / HTML puro
-	],
-	credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use(session({
@@ -64,7 +58,8 @@ app.post('/login', async (req, res) => {
 			id: aluno.id,
 			nome: aluno.nome
 		};
-		res.status(200).send({ mensagem: `Login realizado com sucesso como: ${req.session.user.nome} [${req.session.user.id}]` });
+
+		res.status(200).send({ mensagem: `Login realizado com sucesso como: ${req.session.user.nome}` });
 	} catch (err) {
 		res.status(500).send(err)
 	}
@@ -110,10 +105,10 @@ app.post("/aluno", async (req, res) => {
 });
 
 
-app.post("/compra", async (req, res) => {
+app.post("/compra", index.autenticar_login, async (req, res) => {
 	try {
-		const { id_aluno, metodo, desconto, data_efetuacao } = req.body;
-		await index.registrar_compra(id_aluno, metodo, desconto, data_efetuacao);
+		const { id_aluno, metodo, desconto } = req.body;
+		await index.registrar_compra(id_aluno, metodo, desconto);
 
 		res.status(201).send("Compra registrada com sucesso!");
 	} catch (err) {
