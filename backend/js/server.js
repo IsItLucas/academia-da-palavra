@@ -50,8 +50,10 @@ app.post('/login', async (req, res) => {
 			return;
 		}
 
-		req.session.user.id = aluno.id;
-		req.session.user.nome = aluno.nome;
+		req.session.user = {
+			id: aluno.id,
+			nome: aluno.nome
+		};
 		res.status(200).send({ mensagem: `Login realizado com sucesso como: ${req.session.user.nome} [${req.session.user.id}]` });
 	} catch (err) {
 		res.status(500).send(err)
