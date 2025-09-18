@@ -203,7 +203,7 @@ a {
 	font-weight: bold;
 
 	position: relative;
-	bottom: 0;
+	bottom: 0.4rem;
 
 	border-radius: 0.625rem;
 	padding: 0.5rem 1rem;
@@ -216,11 +216,11 @@ a:visited {
 	color: var(--cor-secundaria);
 }
 a:hover {
-	bottom: 0.125rem;
+	bottom: 0.525rem;
 	filter: brightness(1.25);
 }
 a:active {
-	bottom: -0.0625rem;
+	bottom: 0.3375rem;
 	filter: brightness(0.75);
 }
 

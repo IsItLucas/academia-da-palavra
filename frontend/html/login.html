@@ -4,26 +4,43 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title>Login</title>
-	<link rel="stylesheet" href="../css/login.css">
-	<script src="../js/login.js"></script>
+
+	<link rel="stylesheet" href="../css/global.css">
+	<link rel="stylesheet" href="../css/login-cadastro.css">
+	<link rel="stylesheet" href="../css/popup.css">
+	
+	<script type="module" src="../js/login.js"></script>
+	<script type="module" src="../js/modules/tema.js"></script>
+	<script type="module" src="../js/modules/popup.js"></script>
+
+	<script src="https://kit.fontawesome.com/7525a27d59.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body id="body">
 	<div class="container">
 		<h2>Login</h2>
-		<form action="#" method="post">
+		<form action="" method="post">
 			<label for="email">Email:</label>
 			<input type="email" id="email" name="email" required>
+
 			<br>
+
 			<label for="senha">Senha:</label>
 			<input type="password" id="senha" name="senha" required>
 
-			<button type="submit">Entrar</button>
+			<br><br>
+
+			<button type="button" onclick="logar()">ENTRAR</button>
 		</form>
+
 		<br>
-		<p>Não tem uma conta?</p>
-		<a href="cadastro.html">Cadastre-se</a>
+
+		<div class="redirect">
+			<p>Não tem uma conta?</p>
+			<a href="cadastro.html">Cadastre-se</a>
+		</div>
 	</div>
 </body>
 

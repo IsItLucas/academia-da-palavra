@@ -15,9 +15,6 @@ window.alternar_tema = tema.alternar_tema;
 window.addEventListener("DOMContentLoaded", on_load);
 
 
-const body = document.body;
-
-const form = document.getElementById('form-cadastro');
 const senha = document.getElementById('senha');
 const confirmarSenha = document.getElementById('confirmar-senha');
 
@@ -28,13 +25,8 @@ async function on_load() {
 
 
 async function cadastrar_aluno() {
-	const mensagensExistentes = form.querySelectorAll('.mensagem');
-	mensagensExistentes.forEach(msg => msg.remove());
-
 	if (senha.value !== confirmarSenha.value) {
-		alert("As senhas não coincidem!");
-		confirmarSenha.focus();
-
+		mostrar_erro("As senhas não coincidem!")
 		return;
 	}
 
@@ -75,7 +67,7 @@ function mostrar_erro(err) {
 
 
 function mostrar_sucesso() {
-	const texto_sucesso = "Conta criada com sucesso!\n\nSua conta Academia da Palavra foi criada com sucesso.\nPara começar a usar o serviço, faça login primeiro.";
+	const texto_sucesso = "Sua conta Academia da Palavra foi criada com sucesso.\nPara começar o curso, faça login primeiro.";
 
 	popup.definir_tipo_popup(1);
 	popup.definir_texto_popup("Sucesso!", texto_sucesso);

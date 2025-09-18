@@ -42,13 +42,9 @@ function get_avaliacao() {
 	const nota = parseInt(document.getElementById("satisfacao").value, 10);
 	const conteudo = document.getElementById("comentario").value;
 
-	// let date = new Date().toISOString().split("T")[0];
-
 	return {
-		"id_aluno": 1,
 		"conteudo": conteudo,
 		"nota": nota,
-		// "data_realizacao": date
 	}
 }
 

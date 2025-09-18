@@ -30,7 +30,7 @@ h2 {
 
 
 .container {
-	padding: 4rem;
+	padding: 4rem 4rem 2rem 4rem;
 	border-radius: 1rem;
 	width: 800px;
 	max-width: 90%;
