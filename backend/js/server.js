@@ -37,7 +37,7 @@ app.post('/login', async (req, res) => {
 	const { email, senha } = req.body;
 
 	try {
-		const alunos = index.obter_alunos();
+		const alunos = await index.obter_alunos();
 
 		const aluno = alunos.find(a => a.email === email);
 		if (!aluno) {
