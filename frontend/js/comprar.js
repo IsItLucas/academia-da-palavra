@@ -30,17 +30,19 @@ async function confirmar_compra() {
 		const resposta_endereco = await fetch(`${URL}/endereco`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(get_endereco())
+			body: JSON.stringify(await get_endereco())
 		});
+		if (!resposta_endereco.ok) {
+			throw new Error("Erro ao comprar curso:\n" + resposta_endereco);
+		}
 
 		const resposta_compra = await fetch(`${URL}/compra`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(get_compra())
+			body: JSON.stringify(await get_compra())
 		});
-
-		if (!resposta.ok) {
-			throw new Error("Erro ao comprar curso:\n" + resposta);
+		if (!resposta_compra.ok) {
+			throw new Error("Erro ao comprar curso:\n" + resposta_compra);
 		}
 
 		mostrar_sucesso();
@@ -58,14 +60,14 @@ async function confirmar_compra() {
 
 async function get_compra() {
 	return {
-		"id_aluno": await fetch(`${URL}/me`).id,
+		"id_aluno": await get_usuario().user.id,
 		"metodo": document.getElementById("metodo").value,
 		"desconto": 0,
 	}
 }
 
 
-function get_endereco() {
+async function get_endereco() {
 	let endereco = {};
 	let ids = [
 		"pais",
@@ -84,7 +86,23 @@ function get_endereco() {
 		endereco[id] = valor;
 	}
 
+	endereco["id_aluno"] = await get_usuario().user.id;
+
 	return endereco;
+}
+
+
+async function get_usuario() {
+	const res = await fetch(`${URL}`, {
+		credentials: "include" // envia cookie de sessão
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		console.log("Usuário logado:", data.user);
+	} else {
+		console.log("Não autenticado");
+	}
 }
 
 

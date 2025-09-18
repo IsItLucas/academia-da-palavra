@@ -30,6 +30,7 @@ async function logar() {
 
 	try {
 		const resposta = await fetch(`${URL}/login`, {
+			credentials: "include",
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ email, senha })

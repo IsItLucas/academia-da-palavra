@@ -40,6 +40,7 @@ async function cadastrar_aluno() {
 
 	try {
 		const resposta = await fetch(`${URL}/aluno`, {
+			credentials: "include",
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(usuario)
