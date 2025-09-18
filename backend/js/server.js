@@ -30,7 +30,7 @@ app.use(session({
 }));
 
 
-index.setup_database()
+// index.setup_database()
 
 
 app.post('/login', async (req, res) => {
@@ -45,16 +45,13 @@ app.post('/login', async (req, res) => {
 			return;
 		}
 
-		console.log("Senha Inserida: " + senha);
-		console.log("Senha DB: " + aluno.senha);
-		console.log("Correto? " + await crypt.descriptografar(senha, aluno.senha))
 		if (!await crypt.descriptografar(senha, aluno.senha)) {
 			res.status(401).send({ erro: "Credenciais inválidas" });
 			return;
 		}
 
 		req.session.user = { nome: aluno.nome };
-		res.status(200).send({ mensagem: "Login realizado com sucesso!" });
+		res.status(200).send({ mensagem: "Login realizado com sucesso como" + req.session.user.nome });
 	} catch (err) {
 		res.status(500).send(err)
 	}
