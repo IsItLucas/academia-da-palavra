@@ -70,8 +70,10 @@ app.post('/login', async (req, res) => {
 });
 
 
-app.get("/me", (req, res) => {
-	if (!req.session.user) {
+app.post("/me", async (req, res) => {
+	const { email } = req.body;
+
+	if (!await index.get_usuario_por_email(email)) {
 		return res.status(401).json({ erro: "Não autenticado" });
 	}
 
