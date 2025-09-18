@@ -93,7 +93,7 @@ async function get_endereco() {
 
 
 async function get_usuario() {
-	const res = await fetch(`${URL}`, {
+	const res = await fetch(`${URL}/me`, {
 		credentials: "include" // envia cookie de sessão
 	});
 
