@@ -146,7 +146,7 @@ export async function setup_database() {
             id_aluno INT NOT NULL,
             metodo ENUM("pix", "credito", "debito", "boleto") NOT NULL,
             desconto INT DEFAULT 0,
-            data_efetuacao DATE NOT NULL DEFAULT (CURRENT_DATE),
+            data_efetuacao DATE DEFAULT (CURRENT_DATE),
             FOREIGN KEY (id_aluno) REFERENCES alunos(id)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE
@@ -179,7 +179,7 @@ export async function setup_database() {
             id_aluno INT NOT NULL,
             conteudo VARCHAR(512) NOT NULL,
             nota TINYINT NOT NULL,
-            data_realizacao DATE NOT NULL,
+            data_realizacao DATE DEFAULT (CURRENT_DATE),
             FOREIGN KEY (id_aluno) REFERENCES alunos(id)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE
