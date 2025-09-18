@@ -9,11 +9,11 @@ import * as crypt from "./crypt.js";
 import { conectar } from "./database.js";
 
 
-// dotenv.config({
-// 	path: "backend/.env",
-// 	encoding: "utf8",
-// 	debug: true
-// });
+dotenv.config({
+	path: "backend/.env",
+	encoding: "utf8",
+	debug: true
+});
 
 
 const app = express();
