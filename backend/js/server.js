@@ -50,8 +50,9 @@ app.post('/login', async (req, res) => {
 			return;
 		}
 
-		req.session.user = aluno;
-		res.status(200).send({ mensagem: "Login realizado com sucesso como:" + req.session.user });
+		req.session.user.id = aluno.id;
+		req.session.user.nome = aluno.nome;
+		res.status(200).send({ mensagem: `Login realizado com sucesso como: ${req.session.user.nome} [${req.session.user.id}]` });
 	} catch (err) {
 		res.status(500).send(err)
 	}
@@ -59,7 +60,7 @@ app.post('/login', async (req, res) => {
 
 
 app.get('/dashboard', index.autenticar, (req, res) => {
-	res.status(200).send(`Bem-vindo, ${req.session.user.nome}!`);
+	res.status(200).send(`Bem-vindo, ${req.session.user.nome} [${req.session.user.id}]!`);
 });
 
 
