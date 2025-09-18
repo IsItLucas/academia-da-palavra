@@ -69,8 +69,12 @@ app.post('/login', async (req, res) => {
 });
 
 
-app.get('/dashboard', index.autenticar_login, (req, res) => {
-	res.status(200).send(`Bem-vindo, ${req.session.user.nome} [${req.session.user.id}]!`);
+app.get("/me", (req, res) => {
+	if (!req.session.user) {
+		return res.status(401).json({ erro: "Não autenticado" });
+	}
+
+	res.json({ user: req.session.user });
 });
 
 

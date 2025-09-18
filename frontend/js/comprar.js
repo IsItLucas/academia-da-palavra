@@ -27,15 +27,20 @@ function cancel_purchase() {
 
 async function confirmar_compra() {
 	try {
-		const resposta = await fetch(`${URL}/avaliacao`, {
+		const resposta_endereco = await fetch(`${URL}/endereco`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(get_avaliacao())
+			body: JSON.stringify(get_endereco())
 		});
 
-		console.log(resposta)
+		const resposta_compra = await fetch(`${URL}/compra`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(get_compra())
+		});
+
 		if (!resposta.ok) {
-			throw new Error("Erro ao avaliar curso:\n" + resposta);
+			throw new Error("Erro ao comprar curso:\n" + resposta);
 		}
 
 		mostrar_sucesso();
@@ -48,6 +53,38 @@ async function confirmar_compra() {
 			mostrar_erro(err);
 		}
 	}
+}
+
+
+async function get_compra() {
+	return {
+		"id_aluno": await fetch(`${URL}/me`).id,
+		"metodo": document.getElementById("metodo").value,
+		"desconto": 0,
+	}
+}
+
+
+function get_endereco() {
+	let endereco = {};
+	let ids = [
+		"pais",
+		"estado",
+		"cidade",
+		"bairro",
+		"logradouro",
+		"numero",
+		"complemento",
+		"cep"
+	];
+
+	for (const id of ids) {
+		let elemento = document.getElementById(id);
+		let valor = elemento.value;
+		endereco[id] = valor;
+	}
+
+	return endereco;
 }
 
 
@@ -156,29 +193,6 @@ async function get_cidades(estado) {
 	const resultado = await resposta.json();
 
 	return resultado;
-}
-
-
-function get_endereco() {
-	let endereco = {};
-	let ids = [
-		"pais",
-		"estado",
-		"cidade",
-		"bairro",
-		"logradouro",
-		"numero",
-		"complemento",
-		"cep"
-	];
-
-	for (const id of ids) {
-		let elemento = document.getElementById(id);
-		let valor = elemento.value;
-		endereco[id] = valor;
-	}
-
-	return endereco;
 }
 
 

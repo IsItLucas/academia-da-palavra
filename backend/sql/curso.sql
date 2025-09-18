@@ -34,7 +34,7 @@ CREATE TABLE compras (
 	metodo ENUM("pix", "credito", "debito", "boleto") NOT NULL,
 	desconto INT DEFAULT 0,
 
-	data_efetuacao DATE NOT NULL DEFAULT(CURRENT_DATE),
+	data_efetuacao DATE DEFAULT(CURRENT_DATE),
 
 	FOREIGN KEY (id_aluno) REFERENCES alunos (id)
 		ON DELETE CASCADE

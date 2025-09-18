@@ -42,11 +42,11 @@ async function logar() {
 		mostrar_sucesso();
 
 	} catch (erro) {
-		if (err instanceof Response) {
-			const texto = await err.text();
+		if (erro instanceof Response) {
+			const texto = await erro.text();
 			mostrar_erro(texto);
 		} else {
-			mostrar_erro(err);
+			mostrar_erro(erro);
 		}
 	}
 }
