@@ -2,17 +2,8 @@
 
 Bem-vindo ao repositório da **Academia da Palavra** — um site moderno e interativo voltado para a divulgação e venda de um curso de inglês inovador. O projeto foi desenvolvido com foco em usabilidade, estética e tecnologia, oferecendo aos usuários uma experiência completa com **aulas interativas e conteúdo personalizado**.
 
----
 
-## 🧾 Índice
 
-- [🎯 Objetivo](#-objetivo)
-- [🚀 Funcionalidades](#-funcionalidades)
-- [🛠️ Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [📂 Estrutura do Projeto](#-estrutura-do-projeto)
-- [🖥️ Como Executar Localmente](#️-como-executar-localmente)
-- [📸 Capturas de Tela (Opcional)](#-capturas-de-tela)
-- [📬 Contato](#-contato)
 
 ---
 
@@ -63,41 +54,10 @@ O projeto visa:
 ---
 
 
-## 📂 Estrutura do Projeto
 
+## 📊 Arquitetura
 
-| Camada            | Responsabilidade                                                |
-| ----------------- | --------------------------------------------------------------- |
-| **Frontend**      | Interface do usuário e interação visual (HTML, CSS, JS)         |
-| **Controller**    | Gerencia regras de negócio e intermedia frontend ↔ backend      |
-| **Service/Model** | Comunicação com o banco de dados (MySQL) e manipulação de dados |
-| **Database**      | Conexão, criação e execução de queries no banco de dados        |
-
-📐 1. Fluxo de Funcionamento (Frontend ↔ Backend ↔ Banco)
-
-Usuário (Navegador)
-   ↓
-HTML + CSS + JS (frontend)
-   ↓       ↑
-   ↓       └── Alternar tema, abrir imagens, chamar funções JS
-   ↓
-Funções JS (ex: enviar avaliação)
-   ↓
-Backend (Node.js)
-   ├── Controller (função: enviar_avaliacao)
-   ├── Chamada ao banco via `db.conectar()`
-   └── Inserção/consulta no MySQL
-   ↓
-Banco de Dados (MySQL)
-   ↑
-Resposta para o Frontend (JSON ou redirecionamento)
-
-------------------
-
-📁 2. Estrutura do Projeto
-
-
-
+```mermaid
 flowchart TD
     subgraph Client["Usuário / Navegador"]
         Browser["🌐 Navegador (HTML, CSS, JS)"]
@@ -121,70 +81,83 @@ flowchart TD
     API -->|"SQL Queries"| DB
     DB -->|"Resultados SQL"| API
     API -->|"JSON Response"| Pages
+```
+
+------------------
+
+# 📁 2. Estrutura do Projeto
+
+- /frontend → Código do site (HTML, CSS, JS)
+- /backend → API em Node.js + Express
+    - /backend/js/server.js → Ponto de entrada
+    - /backend/js/db.js → Conexão com o banco
+    - /backend/js/controllers.js → Lógica da aplicação
+    - /backend/sql → Scripts SQL para criação de tabelas
 
 
----------
 
-academia-da-palavra/
-│
-├── frontend/
-│   ├── index.html
-│   ├── css/
-│   │   ├── global.css
-│   │   ├── home.css
-│   │   └── lightbox.css
-│   ├── js/
-│   │   ├── home.js
-│   │   └── modules/
-│   │       ├── lightbox.js
-│   │       └── tema.js
-│   └── img/
-│       ├── logo/
-│       ├── promo/
-│       └── curiosidades/
-│
-├── backend/
-│   ├── controller.js          # Onde estão as funções principais como enviar_avaliacao
-│   ├── database.js            # Conexão com MySQL
-│   ├── crypt.js               # Funções de hash/senha (ex: bcrypt)
-│   ├── main.js                # Inicialização ou testes locais
-│   └── routes.js (opcional)  # Se for criar API REST com Express
-│
-├── README.md
-├── package.json
-└── .gitignore
 
---------------
 
-🔄 Diagrama de Sequência – Fluxo de Requisição
+# 🔄 Diagrama de Sequência – Fluxo de Requisição
 
+```mermaid
 sequenceDiagram
-    participant U as Usuário (Navegador)
-    participant FE as Frontend (HTML/CSS/JS - GitHub Pages)
-    participant BE as Backend (Node.js + Express - Railway)
-    participant DB as Banco de Dados (MySQL)
+    participant U as Usuário
+    participant F as Frontend (GitHub Pages)
+    participant B as Backend (Railway - Node.js)
+    participant D as Banco de Dados (MySQL)
 
-    U->>FE: Acessa página de Avaliações (avaliacoes.html)
-    FE->>U: Renderiza formulário (HTML/CSS/JS)
+    %% Acesso ao site
+    U->>F: Acessa site pelo navegador
+    F->>B: GET /home
+    B-->>F: Retorna HTML/CSS/JS
+    F-->>U: Renderiza página inicial
 
-    U->>FE: Preenche nota e comentário e clica "Enviar Avaliação"
-    FE->>BE: Fetch POST /avaliacao { id_aluno, conteudo, nota, data_realizacao }
-    BE->>DB: INSERT INTO avaliacoes (...)
-    DB-->>BE: Confirma inserção
-    BE-->>FE: Resposta 200 ("Avaliação enviada com sucesso!")
-    FE-->>U: Exibe mensagem de sucesso
+    %% Consulta de notícias ou promoções
+    U->>F: Clica em notícias/promoções
+    F->>B: GET /noticias ou /promocoes
+    B->>D: SELECT * FROM noticias/promocoes
+    D-->>B: Retorna resultados
+    B-->>F: JSON com notícias/promos
+    F-->>U: Renderiza notícias/promos na tela
 
-    Note over U,FE: Para listar avaliações na home.html
-    U->>FE: Abre Home (home.html)
-    FE->>BE: Fetch GET /avaliacoes
-    BE->>DB: SELECT * FROM avaliacoes
-    DB-->>BE: Retorna lista de avaliações
-    BE-->>FE: JSON com avaliações
-    FE-->>U: Renderiza reviews na seção "Nossas Avaliações"
+    %% Aula introdutória
+    U->>F: Reproduz vídeo da aula gratuita
+    F-->>U: Mostra vídeo incorporado
 
+    %% Envio de avaliação
+    U->>F: Preenche formulário de avaliação
+    F->>B: POST /avaliacao {dados}
+    B->>D: INSERT INTO avaliacoes
+    D-->>B: Confirmação inserção
+    B-->>F: Resposta de sucesso
+    F-->>U: Exibe mensagem de confirmação
+
+    %% Consulta de curiosidades culturais
+    U->>F: Clica em curiosidades
+    F->>B: GET /curiosidades
+    B->>D: SELECT * FROM curiosidades
+    D-->>B: Retorna resultados
+    B-->>F: JSON com curiosidades
+    F-->>U: Renderiza curiosidades na tela
+
+    %% Alternância de tema
+    U->>F: Clica botão de alternar tema (claro/escuro)
+    F->>F: Aplica CSS dinamicamente
+    F-->>U: Atualiza visual
+
+    %% Compra do curso
+    U->>F: Clica botão de compra
+    F->>B: POST /comprar {dados do usuário}
+    B->>D: Inserção ou validação da compra
+    D-->>B: Confirmação
+    B-->>F: Resposta de sucesso
+    F-->>U: Mostra confirmação da compra
+
+```
 ------------
 
-3️⃣ Clonar ou baixar o código
+# 3️⃣ Clonar ou baixar o código
 
 git clone https://github.com/seu-usuario/academia-da-palavra.git
 cd academia-da-palavra/backend
@@ -197,9 +170,9 @@ Se não estiver no GitHub, apenas copie a pasta academia-da-palavra para sua má
 cd backend
 npm install
 
----------------
 
-4️⃣ Configurar variáveis de ambiente no backend
+
+# 4️⃣ Configurar variáveis de ambiente no backend
 
 No arquivo backend/.env:
 
@@ -214,7 +187,7 @@ SERVER_IP=127.0.0.1
 
 --------------
 
-5️⃣ Testar conexão via Node.js
+# 5️⃣ Testar conexão via Node.js
 
 Na pasta backend:
 
@@ -222,7 +195,7 @@ npm start
 
 ---------------
 
-6️⃣ Testar conexão via Node.js
+# 6️⃣ Testar conexão via Node.js
 
 Na pasta backend:
 
