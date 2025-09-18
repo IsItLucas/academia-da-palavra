@@ -109,7 +109,7 @@ app.post("/aluno", async (req, res) => {
 });
 
 
-app.post("/compra", index.autenticar_login, async (req, res) => {
+app.post("/compra", async (req, res) => {
 	try {
 		const { id_aluno, metodo, desconto } = req.body;
 		await index.registrar_compra(id_aluno, metodo, desconto);
