@@ -61,7 +61,7 @@ app.post('/login', async (req, res) => {
 });
 
 
-app.get('/dashboard', index.autenticar, (req, res) => {
+app.get('/dashboard', index.autenticar_login, (req, res) => {
 	res.status(200).send(`Bem-vindo, ${req.session.user.nome} [${req.session.user.id}]!`);
 });
 
@@ -72,12 +72,12 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.post("/avaliacao", async (req, res) => {
+app.post("/avaliacao", index.autenticar_compra, async (req, res) => {
 	try {
-		const { id_aluno, conteudo, nota, data_realizacao } = req.body;
-		await index.enviar_avaliacao(id_aluno, conteudo, nota, data_realizacao);
+		const { conteudo, nota } = req.body;
+		await index.enviar_avaliacao(conteudo, nota);
 
-		res.status(201).send("Avaliação enviada com sucesso!");
+		res.status(201).send(`Avaliação enviada com sucesso como: ${req.session.user.nome} [${req.session.user.id}]`);
 	} catch (err) {
 		res.status(500).send(err)
 	}

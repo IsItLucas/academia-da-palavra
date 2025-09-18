@@ -2,11 +2,28 @@ import * as db from "./database.js";
 import * as crypt from "./crypt.js";
 
 
-export function autenticar(req, res, next) {
+export function autenticar_login(req, res, next) {
 	if (req.session.user) {
 		next();
 	} else {
 		res.status(403).send({ erro: "Acesso negado! Faça login primeiro." });
+	}
+}
+
+
+export function autenticar_compra(req, res, next) {
+	if (!req.session.user) {
+		res.status(403).send({ erro: "Acesso negado! Faça login primeiro." });
+		return;
+	}
+
+	const compras = obter_compras();
+	const compra = compras.find(a => a.id_aluno === req.session.user.id);
+
+	if (compra) {
+		next();
+	} else {
+		res.status(403).send({ erro: "Acesso negado! Adquira o curso primeiro." });
 	}
 }
 
@@ -16,7 +33,7 @@ export async function enviar_avaliacao(conteudo, nota) {
 
 	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota) VALUES (?, ?, ?)";
 	const parametros = [
-		req.session.user.id_aluno,
+		req.session.user.id,
 
 		conteudo,
 		nota
