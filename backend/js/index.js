@@ -28,7 +28,7 @@ export async function cadastrar_aluno(nome, cpf, email, senha, nascimento) {
 		nome,
 		cpf,
 		email,
-		crypt.criptografar(senha),
+		await crypt.criptografar(senha),
 		nascimento
 	];
 
@@ -120,16 +120,17 @@ export async function obter_tabela(tabela) {
 export async function setup_database() {
 	const conexao = await db.conectar();
 
-	await conexao.execute(`DROP DATABASE IF EXISTS academia_da_palavra`);
-	await conexao.execute(`CREATE DATABASE academia_da_palavra`);
-	await conexao.execute(`USE academia_da_palavra`);
+	await conexao.execute(`DROP TABLE IF EXISTS alunos`);
+	await conexao.execute(`DROP TABLE IF EXISTS compras`);
+	await conexao.execute(`DROP TABLE IF EXISTS endereços`);
+	await conexao.execute(`DROP TABLE IF EXISTS avaliacoes`);
 
 	// Tabela alunos
 	await conexao.execute(`
         CREATE TABLE IF NOT EXISTS alunos (
             id INT PRIMARY KEY AUTO_INCREMENT,
             email VARCHAR(128) NOT NULL UNIQUE,
-            senha VARCHAR(64) NOT NULL,
+            senha VARCHAR(250) NOT NULL,
             nome VARCHAR(128) NOT NULL,
             cpf VARCHAR(14),
             nascimento DATE,
