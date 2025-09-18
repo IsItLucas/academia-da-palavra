@@ -33,7 +33,12 @@ async function enviar() {
 		mostrar_sucesso();
 
 	} catch(err) {
-		mostrar_erro(err);
+		if (err instanceof Response) {
+			const texto = await err.text();
+			mostrar_erro(texto);
+		} else {
+			mostrar_erro(err);
+		}
 	}
 }
 

@@ -51,7 +51,12 @@ async function cadastrar_aluno() {
 
 		mostrar_sucesso();
 	} catch (erro) {
-		mostrar_erro(erro);
+		if (erro instanceof Response) {
+			const texto = await err.text();
+			mostrar_erro(texto);
+		} else {
+			mostrar_erro(erro);
+		}
 	}
 }
 
