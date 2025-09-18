@@ -1,4 +1,0 @@
-Projeto Academia da Palavra 
-
-Este é uma pagina desenvolvida para ser uma plataforma de  curso online onde o aluno tem acesso a aulas que estão acontecendo ao vivo e no caso da impossibilidade de assistir ao vivo a aula fica gravada dentro da pagina. 
-
