@@ -10,8 +10,7 @@ export async function enviar_avaliacao(id_aluno, conteudo, nota) {
 		id_aluno,
 
 		conteudo,
-		nota,
-		data_realizacao
+		nota
 	];
 
 	console.log("Executando:", query, parametros);
@@ -45,8 +44,7 @@ export async function registrar_compra(id_aluno, metodo, desconto) {
 	const parametros = [
 		id_aluno,
 		metodo,
-		desconto,
-		data_efetuacao,
+		desconto
 	];
 
 	console.log("Executando:", query, parametros);
