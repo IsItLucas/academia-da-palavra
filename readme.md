@@ -104,56 +104,38 @@ flowchart TD
 sequenceDiagram
     participant U as Usuário
     participant F as Frontend (GitHub Pages)
-    participant B as Backend (Railway - Node.js)
+    participant B as Backend (Railway/Node.js)
     participant D as Banco de Dados (MySQL)
 
     %% Acesso ao site
-    U->>F: Acessa site pelo navegador
-    F->>B: GET /home
-    B-->>F: Retorna HTML/CSS/JS
-    F-->>U: Renderiza página inicial
+    U->>F: Acessa site
+    F->>B: GET /
+    B-->>F: HTML/CSS/JS
+    F-->>U: Exibe página inicial
 
-    %% Consulta de notícias ou promoções
-    U->>F: Clica em notícias/promoções
-    F->>B: GET /noticias ou /promocoes
-    B->>D: SELECT * FROM noticias/promocoes
+    %% Consulta de conteúdo (notícias, promoções, curiosidades)
+    U->>F: Solicita conteúdo
+    F->>B: GET /conteúdo
+    B->>D: SELECT dados
     D-->>B: Retorna resultados
-    B-->>F: JSON com notícias/promos
-    F-->>U: Renderiza notícias/promos na tela
-
-    %% Aula introdutória
-    U->>F: Reproduz vídeo da aula gratuita
-    F-->>U: Mostra vídeo incorporado
+    B-->>F: JSON
+    F-->>U: Renderiza na tela
 
     %% Envio de avaliação
-    U->>F: Preenche formulário de avaliação
-    F->>B: POST /avaliacao {dados}
-    B->>D: INSERT INTO avaliacoes
-    D-->>B: Confirmação inserção
-    B-->>F: Resposta de sucesso
-    F-->>U: Exibe mensagem de confirmação
-
-    %% Consulta de curiosidades culturais
-    U->>F: Clica em curiosidades
-    F->>B: GET /curiosidades
-    B->>D: SELECT * FROM curiosidades
-    D-->>B: Retorna resultados
-    B-->>F: JSON com curiosidades
-    F-->>U: Renderiza curiosidades na tela
-
-    %% Alternância de tema
-    U->>F: Clica botão de alternar tema (claro/escuro)
-    F->>F: Aplica CSS dinamicamente
-    F-->>U: Atualiza visual
+    U->>F: Envia avaliação
+    F->>B: POST /avaliacao
+    B->>D: INSERT avaliacoes
+    D-->>B: Confirmação
+    B-->>F: Sucesso
+    F-->>U: Mensagem confirmada
 
     %% Compra do curso
-    U->>F: Clica botão de compra
-    F->>B: POST /comprar {dados do usuário}
-    B->>D: Inserção ou validação da compra
+    U->>F: Solicita compra
+    F->>B: POST /comprar
+    B->>D: Valida/insere compra
     D-->>B: Confirmação
-    B-->>F: Resposta de sucesso
-    F-->>U: Mostra confirmação da compra
-
+    B-->>F: Sucesso
+    F-->>U: Mostra confirmação
 ```
 ------------
 
