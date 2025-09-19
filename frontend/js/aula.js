@@ -99,6 +99,6 @@ function checarRespostas() {
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById("atividades-container");
     const aulaId = container.dataset.aula || 1;
-    exibir_atividades(aulaId);
+    // exibir_atividades(aulaId);
 });
 
