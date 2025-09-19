@@ -62,7 +62,7 @@ async function get_compra() {
 	const usuario = await get_usuario();
 
 	return {
-		"id_aluno": usuario.user.id,
+		"id_aluno": usuario.id,
 		"metodo": document.getElementById("metodo").value,
 		"desconto": 0,
 	}
@@ -89,20 +89,24 @@ async function get_endereco() {
 	}
 
 	const usuario = await get_usuario();
-	endereco["id_aluno"] = usuario.user.id;
+	endereco["id_aluno"] = usuario.id;
 
 	return endereco;
 }
 
 
 async function get_usuario() {
-	console.log(document.cookie)
+	const email = document.getElementById("email").value;
+	console.log(email);
 	const res = await fetch(`${URL}/me`, {
-		credentials: "include" // envia cookie de sessão
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ email })
 	});
 
 	if (res.ok) {
 		const data = await res.json();
+		console.log(data);
 		console.log("Usuário logado:", data.user);
 	} else {
 		console.log("Não autenticado");
