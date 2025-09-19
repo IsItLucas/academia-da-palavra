@@ -40,6 +40,7 @@ async function logar() {
 			throw new Error(resposta);
 		}
 
+		window.location.href = "./zona_de_aulas.html";
 		mostrar_sucesso();
 
 	} catch (erro) {

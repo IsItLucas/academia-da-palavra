@@ -68,5 +68,10 @@ async function exibir_aulas() {
     }
 }
 
+
+function redirecionar(link) {
+    window.location.href = link;
+}
+
 // Executa ao carregar a página
 document.addEventListener('DOMContentLoaded', exibir_aulas);
