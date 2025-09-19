@@ -18,12 +18,14 @@ function on_load() {
 
 
 async function enviar() {
-	console.log(JSON.stringify(get_avaliacao()));
 	try {
+		const avaliacao = await get_avaliacao();
+		console.log(avaliacao);
+
 		const resposta = await fetch(`${URL}/avaliacao`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(get_avaliacao())
+			body: JSON.stringify(avaliacao)
 		});
 
 		if (!resposta.ok) {
@@ -43,13 +45,34 @@ async function enviar() {
 }
 
 
-function get_avaliacao() {
+async function get_avaliacao() {
 	const nota = parseInt(document.getElementById("satisfacao").value, 10);
 	const conteudo = document.getElementById("comentario").value;
+	const email = document.getElementById("email").value;
 
+	const usuario = await get_usuario();
 	return {
+		"id_aluno": usuario.id,
 		"conteudo": conteudo,
 		"nota": nota,
+	}
+}
+
+
+async function get_usuario() {
+	const email = document.getElementById("email").value;
+	const res = await fetch(`${URL}/me`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ email })
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		console.log("Usuário logado:", data);
+		return data;
+	} else {
+		console.log("Não autenticado");
 	}
 }
 

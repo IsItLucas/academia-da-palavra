@@ -34,12 +34,12 @@ export async function autenticar_compra(req, res, next) {
 }
 
 
-export async function enviar_avaliacao(conteudo, nota) {
+export async function enviar_avaliacao(id_aluno, conteudo, nota) {
 	const conexao = await db.conectar();
 
 	const query = "INSERT INTO avaliacoes(id_aluno, conteudo, nota) VALUES (?, ?, ?)";
 	const parametros = [
-		req.session.user.id,
+		id_aluno,
 
 		conteudo,
 		nota
