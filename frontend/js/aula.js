@@ -30,43 +30,75 @@ function fecharLightbox() {
     lightbox.innerHTML = '<span class="fechar" onclick="fecharLightbox()">&times;</span><img id="lightbox-img" src="">';
 }
 
-// Buscar e exibir atividades
-async function exibir_atividades() {
+// Exibir atividades de uma aula
+async function exibir_atividades(aulaId = 1) {
     const container = document.getElementById("atividades-container");
     container.innerHTML = "<p>Carregando atividades...</p>";
 
     try {
-        const resposta = await fetch("http://localhost:3000/atividades");
+        const resposta = await fetch(`http://localhost:3000/atividades?aula=${aulaId}`);
         if (!resposta.ok) throw new Error("Erro ao buscar atividades no servidor.");
         const atividades = await resposta.json();
 
-        container.innerHTML = ""; // limpa antes de adicionar
+        container.innerHTML = "";
 
-        atividades.forEach(atividade => {
-            const section = document.createElement('section');
-            section.classList.add('atividade');
+        if (atividades.length === 0) {
+            container.innerHTML = "<p>Não há atividades cadastradas para esta aula.</p>";
+            return;
+        }
 
-            const titulo = document.createElement('h2');
-            titulo.textContent = atividade.titulo;
+        const form = document.createElement('form');
+        form.id = 'form-atividades';
 
-            const descricao = document.createElement('p');
-            descricao.textContent = atividade.descricao;
+        atividades.forEach((atividade, index) => {
+            const div = document.createElement('div');
+            div.classList.add('atividade');
 
-            const button = document.createElement('button');
-            button.textContent = "Fazer Atividade";
-            button.addEventListener("click", () => abrirLightbox(atividade.link));
+            div.innerHTML = `
+                <label for="atividade_${atividade.id}"><strong>Exercício ${index + 1}:</strong> ${atividade.pergunta}</label><br>
+                <input type="text" id="atividade_${atividade.id}" name="atividade_${atividade.id}" data-resposta="${atividade.resposta}">
+            `;
 
-            section.appendChild(titulo);
-            section.appendChild(descricao);
-            section.appendChild(button);
-
-            container.appendChild(section);
+            form.appendChild(div);
         });
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = "Enviar Respostas";
+        btn.addEventListener('click', checarRespostas);
+        form.appendChild(btn);
+
+        container.appendChild(form);
+
     } catch (err) {
         console.error(err);
         container.innerHTML = "<p>Erro ao carregar atividades. Tente novamente mais tarde.</p>";
     }
 }
 
-// Executa ao carregar a página
-document.addEventListener('DOMContentLoaded', exibir_atividades);
+function checarRespostas() {
+    const inputs = document.querySelectorAll('#form-atividades input');
+    let resultadoHTML = '';
+
+    inputs.forEach(input => {
+        const respostaCorreta = input.dataset.resposta.trim().toLowerCase();
+        const valorUsuario = input.value.trim().toLowerCase();
+
+        if (valorUsuario.localeCompare(respostaCorreta, 'pt', { sensitivity: 'base' }) === 0) {
+            resultadoHTML += `<p class="correto">${input.previousElementSibling.textContent} ✅ Correto!</p>`;
+        } else {
+            resultadoHTML += `<p class="incorreto">${input.previousElementSibling.textContent} ❌ Incorreto! Resposta correta: "${input.dataset.resposta}"</p>`;
+        }
+    });
+
+    document.getElementById('resultado').innerHTML = resultadoHTML;
+}
+
+
+// Inicialização ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById("atividades-container");
+    const aulaId = container.dataset.aula || 1;
+    exibir_atividades(aulaId);
+});
+
