@@ -27,7 +27,7 @@ nav {
 	display: inline-flex;
 	flex-wrap: wrap;
 
-	width: 84%;
+	width: 100%;
 	gap: 0.5rem;
 }
 .nav-tema {
@@ -39,7 +39,6 @@ nav {
 	width: 25%;
 	gap: 0.5rem;
 }
-
 
 nav button {
 	text-align: center;

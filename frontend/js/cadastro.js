@@ -1,103 +1,82 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('form-cadastro');
-    const senha = document.getElementById('senha');
-    const confirmarSenha = document.getElementById('confirmar-senha');
-    const toggleDarkBtn = document.getElementById('toggle-dark-mode');
-    const body = document.body;
-    const selectCurso = document.getElementById('curso');
+import { IP, PORTA, URL } from "./modules/ip.js";
 
-    // --- Carregar cursos dinamicamente ---
-    async function carregarCursos() {
-        try {
-            const resposta = await fetch("http://localhost:3000/cursos");
-            const cursos = await resposta.json();
+import * as popup from "./modules/popup.js";
+import * as lightbox from "./modules/lightbox.js";
+import * as tema from "./modules/tema.js";
 
-            cursos.forEach(curso => {
-                const option = document.createElement('option');
-                option.value = curso.id;
-                option.textContent = curso.nome;
-                selectCurso.appendChild(option);
-            });
-        } catch (erro) {
-            console.error("Erro ao carregar cursos:", erro);
-        }
-    }
 
-    carregarCursos();
+window.cadastrar_aluno = cadastrar_aluno;
 
-    // --- Função de cadastro de usuário ---
-    async function cadastrarUsuario(event) {
-        event.preventDefault();
+window.abrir_lightbox = lightbox.abrir_lightbox;
+window.fechar_lightbox = lightbox.fechar_lightbox;
+window.alternar_tema = tema.alternar_tema;
 
-        // Limpar mensagens antigas
-        const mensagensExistentes = form.querySelectorAll('.mensagem');
-        mensagensExistentes.forEach(msg => msg.remove());
 
-        if (senha.value !== confirmarSenha.value) {
-            alert("As senhas não coincidem!");
-            confirmarSenha.focus();
-            return;
-        }
+window.addEventListener("DOMContentLoaded", on_load);
 
-        if (selectCurso.value === "") {
-            alert("Por favor, selecione um curso!");
-            selectCurso.focus();
-            return;
-        }
 
-        const usuario = {
-            nome: document.getElementById('nome').value,
-            email: document.getElementById('email').value,
-            data_nascimento: document.getElementById('data-nascimento').value,
-            senha: senha.value,
-            id_curso: selectCurso.value
-        };
+const senha = document.getElementById('senha');
+const confirmarSenha = document.getElementById('confirmar-senha');
 
-        try {
-            const resposta = await fetch("http://localhost:3000/aluno", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(usuario)
-            });
 
-            if (!resposta.ok) throw new Error("Erro ao cadastrar usuário");
+async function on_load() {
+	console.log("JS funcionando");
+}
 
-            // Mensagem de verificação
-            let mensagem = document.createElement('p');
-            mensagem.textContent = "Usuário cadastrado e será matriculado no curso...";
-            mensagem.classList.add('mensagem');
-            mensagem.style.marginTop = "20px";
-            mensagem.style.fontWeight = "bold";
-            mensagem.style.color = "#00796b";
-            form.appendChild(mensagem);
 
-            // Desabilitar botão
-            form.querySelector('button[type="submit"]').disabled = true;
+async function cadastrar_aluno() {
+	if (senha.value !== confirmarSenha.value) {
+		mostrar_erro("As senhas não coincidem!")
+		return;
+	}
 
-            // Redirecionar após 3 segundos
-            setTimeout(() => {
-                window.location.href = "login.html";
-            }, 3000);
+	const usuario = {
+		nome: document.getElementById('nome').value,
+		cpf: document.getElementById('cpf').value,
+		email: document.getElementById('email').value,
+		nascimento: document.getElementById('data-nascimento').value,
+		senha: senha.value,
+	};
 
-            // Limpar formulário
-            form.reset();
+	try {
+		const resposta = await fetch(`${URL}/aluno`, {
+			credentials: "include",
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(usuario)
+		});
 
-        } catch (erro) {
-            console.error(erro);
-            alert("Falha ao cadastrar usuário.");
-        }
-    }
+		if (!resposta.ok) {
+			throw new Error(resposta);
+		}
 
-    // --- Submeter formulário ---
-    form.addEventListener('submit', cadastrarUsuario);
+		mostrar_sucesso();
+	} catch (erro) {
+		if (erro instanceof Response) {
+			const texto = await err.text();
+			mostrar_erro(texto);
+		} else {
+			mostrar_erro(erro);
+		}
+	}
+}
 
-    // --- Modo Escuro ---
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-    }
 
-    toggleDarkBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        localStorage.setItem('darkMode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-    });
-});
+function mostrar_erro(err) {
+	const texto_erro = "Falha ao criar conta Academia da Palavra:";
+
+	popup.definir_tipo_popup(0);
+	popup.definir_texto_popup("Erro!", texto_erro + "\n\n" + err);
+
+	popup.abrir_popup();
+}
+
+
+function mostrar_sucesso() {
+	const texto_sucesso = "Sua conta Academia da Palavra foi criada com sucesso.\nPara começar o curso, faça login primeiro.";
+
+	popup.definir_tipo_popup(1);
+	popup.definir_texto_popup("Sucesso!", texto_sucesso);
+
+	popup.abrir_popup();
+}

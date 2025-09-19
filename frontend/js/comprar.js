@@ -27,21 +27,94 @@ function cancel_purchase() {
 
 async function confirmar_compra() {
 	try {
-		const resposta = await fetch(`${URL}/avaliacao`, {
+		const endereco = await get_endereco();
+		console.log(endereco);
+
+		const resposta_endereco = await fetch(`${URL}/endereco`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(get_avaliacao())
+			body: JSON.stringify(endereco)
 		});
+		if (!resposta_endereco.ok) {
+			throw new Error("Erro ao cadastrar endereço:\n" + resposta_endereco);
+		}
 
-		console.log(resposta)
-		if (!resposta.ok) {
-			throw new Error("Erro ao avaliar curso:\n" + resposta);
+		const compra = await get_compra();
+		console.log(compra);
+
+		const resposta_compra = await fetch(`${URL}/compra`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(compra)
+		});
+		if (!resposta_compra.ok) {
+			throw new Error("Erro ao comprar curso:\n" + resposta_compra);
 		}
 
 		mostrar_sucesso();
 
 	} catch (err) {
-		mostrar_erro(err);
+		if (err instanceof Response) {
+			const texto = await err.text();
+			mostrar_erro(texto);
+		} else {
+			mostrar_erro(err);
+		}
+	}
+}
+
+
+async function get_compra() {
+	const usuario = await get_usuario();
+
+	return {
+		"id_aluno": usuario.id,
+		"metodo": document.getElementById("metodo").value,
+		"desconto": 0,
+	}
+}
+
+
+async function get_endereco() {
+	let endereco = {};
+	let ids = [
+		"pais",
+		"estado",
+		"cidade",
+		"bairro",
+		"logradouro",
+		"numero",
+		"complemento",
+		"cep"
+	];
+
+	for (const id of ids) {
+		let elemento = document.getElementById(id);
+		let valor = elemento.value;
+		endereco[id] = valor;
+	}
+
+	const usuario = await get_usuario();
+	endereco["id_aluno"] = usuario.id;
+
+	return endereco;
+}
+
+
+async function get_usuario() {
+	const email = document.getElementById("email").value;
+	const res = await fetch(`${URL}/me`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ email })
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		console.log("Usuário logado:", data);
+		return data;
+	} else {
+		console.log("Não autenticado");
 	}
 }
 
@@ -151,29 +224,6 @@ async function get_cidades(estado) {
 	const resultado = await resposta.json();
 
 	return resultado;
-}
-
-
-function get_endereco() {
-	let endereco = {};
-	let ids = [
-		"pais",
-		"estado",
-		"cidade",
-		"bairro",
-		"logradouro",
-		"numero",
-		"complemento",
-		"cep"
-	];
-
-	for (const id of ids) {
-		let elemento = document.getElementById(id);
-		let valor = elemento.value;
-		endereco[id] = valor;
-	}
-
-	return endereco;
 }
 
 

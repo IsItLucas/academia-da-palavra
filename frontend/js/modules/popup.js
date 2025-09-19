@@ -55,6 +55,8 @@ export function definir_texto_popup(titulo, mensagem) {
 
 	const elemento_mensagem = document.getElementById("mensagem-popup");
 	elemento_mensagem.innerText = mensagem;
+
+	console.log(titulo + ":\n" + mensagem);
 }
 
 
@@ -65,7 +67,6 @@ export function definir_tipo_popup(tipo) {
 	const elemento_img = document.getElementById("imagem-popup");
 
 	const popup = document.getElementById("popup");
-	console.log(popup);
 	popup.classList.remove("sucesso");
 	popup.classList.remove("erro");
 

@@ -5,10 +5,10 @@ import * as paralaxe from "./modules/paralaxe.js";
 import * as tema from "./modules/tema.js";
 
 
-window.purchase_request = purchase_request;
 window.abrir_lightbox = lightbox.abrir_lightbox;
 window.fechar_lightbox = lightbox.fechar_lightbox;
 window.alternar_tema = tema.alternar_tema;
+window.redirecionar = redirecionar;
 
 window.addEventListener("DOMContentLoaded", on_load);
 
@@ -21,8 +21,8 @@ async function on_load() {
 }
 
 
-function purchase_request() {
-	window.location.href = "../html/comprar.html";
+function redirecionar(link) {
+	window.location.href = link;
 }
 
 

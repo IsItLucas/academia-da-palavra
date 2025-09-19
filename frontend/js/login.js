@@ -1,66 +1,73 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
-    const emailInput = document.getElementById('email');
-    const senhaInput = document.getElementById('senha');
-    const body = document.body;
+import { IP, PORTA, URL } from "./modules/ip.js";
 
-    // --- Carregar preferência do modo escuro ---
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-    }
+import * as popup from "./modules/popup.js";
+import * as lightbox from "./modules/lightbox.js";
+import * as tema from "./modules/tema.js";
 
-    // Botão modo escuro
-    const darkModeBtn = document.createElement('button');
-    darkModeBtn.type = 'button';
-    darkModeBtn.textContent = body.classList.contains('dark-mode') ? '☀️ Modo Claro' : '🌙 Modo Escuro';
-    darkModeBtn.classList.add('dark-mode-btn');
-    form.parentNode.insertBefore(darkModeBtn, form);
 
-    darkModeBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
-        darkModeBtn.textContent = isDark ? '☀️ Modo Claro' : '🌙 Modo Escuro';
-    });
+window.logar = logar;
 
-    // --- Submissão do formulário ---
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+window.abrir_lightbox = lightbox.abrir_lightbox;
+window.fechar_lightbox = lightbox.fechar_lightbox;
+window.alternar_tema = tema.alternar_tema;
 
-        const email = emailInput.value.trim();
-        const senha = senhaInput.value.trim();
 
-        if (!email || !senha) {
-            alert("Preencha todos os campos!");
-            return;
-        }
+window.addEventListener('DOMContentLoaded', on_load);
 
-        try {
-            const resposta = await fetch("http://localhost:3000/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, senha })
-            });
 
-            if (!resposta.ok) {
-                if (resposta.status === 401) {
-                    alert("Email ou senha inválidos.");
-                    return;
-                }
-                throw new Error("Falha ao conectar com o servidor.");
-            }
+const emailInput = document.getElementById('email');
+const senhaInput = document.getElementById('senha');
 
-            const dados = await resposta.json();
 
-            alert(`Bem-vindo(a), ${dados.aluno.nome}!\nRedirecionando para o dashboard...`);
+async function on_load() {
+	console.log("JS funcionando");
+}
 
-            setTimeout(() => {
-                window.location.href = "zona_de_aulas.html";
-            }, 2000);
 
-        } catch (erro) {
-            console.error(erro);
-            alert("Erro ao conectar com o servidor.");
-        }
-    });
-});
+async function logar() {
+	const email = emailInput.value.trim();
+	const senha = senhaInput.value.trim();
+
+	try {
+		const resposta = await fetch(`${URL}/login`, {
+			credentials: "include",
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ email, senha })
+		});
+
+		if (!resposta.ok) {
+			throw new Error(resposta);
+		}
+
+		mostrar_sucesso();
+
+	} catch (erro) {
+		if (erro instanceof Response) {
+			const texto = await erro.text();
+			mostrar_erro(texto);
+		} else {
+			mostrar_erro(erro);
+		}
+	}
+}
+
+
+function mostrar_erro(err) {
+	const texto_erro = "Falha ao logar em conta Academia da Palavra:";
+
+	popup.definir_tipo_popup(0);
+	popup.definir_texto_popup("Erro!", texto_erro + "\n\n" + err);
+
+	popup.abrir_popup();
+}
+
+
+function mostrar_sucesso() {
+	const texto_sucesso = "Você conectou-se à sua conta Academia da palavra com sucesso!\nPara começar o curso, adquira-o se ainda não tiver feito.";
+
+	popup.definir_tipo_popup(1);
+	popup.definir_texto_popup("Sucesso!", texto_sucesso);
+
+	popup.abrir_popup();
+}

@@ -26,7 +26,6 @@ async function enviar() {
 			body: JSON.stringify(get_avaliacao())
 		});
 
-		console.log(resposta)
 		if (!resposta.ok) {
 			throw new Error(resposta);
 		}
@@ -34,7 +33,12 @@ async function enviar() {
 		mostrar_sucesso();
 
 	} catch(err) {
-		mostrar_erro(err);
+		if (err instanceof Response) {
+			const texto = await err.text();
+			mostrar_erro(texto);
+		} else {
+			mostrar_erro(err);
+		}
 	}
 }
 
@@ -43,13 +47,9 @@ function get_avaliacao() {
 	const nota = parseInt(document.getElementById("satisfacao").value, 10);
 	const conteudo = document.getElementById("comentario").value;
 
-	let date = new Date().toISOString().split("T")[0];
-
 	return {
-		"id_aluno": 1,
 		"conteudo": conteudo,
 		"nota": nota,
-		"data_realizacao": date
 	}
 }
 
@@ -82,7 +82,7 @@ function atualizar_estrelas(nota) {
 
 
 function mostrar_erro(err) {
-	const texto_erro = "Falha ao avaliar curso!";
+	const texto_erro = "Falha ao avaliar curso:";
 
 	popup.definir_tipo_popup(0);
 	popup.definir_texto_popup("Erro!", texto_erro + "\n\n" + err);
@@ -92,7 +92,7 @@ function mostrar_erro(err) {
 
 
 function mostrar_sucesso() {
-	const texto_sucesso = "Curiosidade cadastrada com sucesso!\n\nA curiosidade foi cadastrada e adicionada ao banco de dados com êxito.";
+	const texto_sucesso = "Sua avaliação foi enviada com sucesso!";
 
 	popup.definir_tipo_popup(1);
 	popup.definir_texto_popup("Sucesso!", texto_sucesso);
