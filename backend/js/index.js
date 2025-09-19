@@ -108,14 +108,16 @@ export async function cadastrar_endereco(id_aluno, logradouro, numero, complemen
 
 
 export async function get_usuario_por_email(email) {
+	console.log(email);
 	const conexao = await db.conectar();
 
 	const query = "SELECT * FROM alunos WHERE email = ?";
 	const [resultado] = await conexao.execute(query, [email]);
 
 	await db.desconectar(conexao);
+	console.log(resultado);
 
-	return resultado;
+	return resultado[0];
 }
 
 

@@ -97,7 +97,6 @@ async function get_endereco() {
 
 async function get_usuario() {
 	const email = document.getElementById("email").value;
-	console.log(email);
 	const res = await fetch(`${URL}/me`, {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
