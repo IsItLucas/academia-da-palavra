@@ -118,8 +118,6 @@ export async function get_usuario_por_email(email) {
 	const [resultado] = await conexao.execute(query, parametros);
 
 	await db.desconectar(conexao);
-	console.log(resultado[0]);
-
 	return resultado[0];
 }
 

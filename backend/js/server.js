@@ -72,12 +72,13 @@ app.post('/login', async (req, res) => {
 
 app.post("/me", async (req, res) => {
 	const { email } = req.body;
-	const usuario = index.get_usuario_por_email(email);
+	const usuario = await index.get_usuario_por_email(email);
 
 	if (!await usuario) {
 		return res.status(401).json({ erro: "Não autenticado" });
 	}
 
+	console.log(usuario);
 	return res.json(usuario);
 });
 
