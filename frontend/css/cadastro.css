@@ -203,3 +203,26 @@ body.dark-mode button:hover {
 input, select, button, label, .container {
     transition: all 0.4s ease;
 }
+
+/* ============================
+   Botão Voltar para Home
+============================ */
+nav a {
+    display: inline-block;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #00796b, #004d40);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+    margin-bottom: 20px;
+}
+
+nav a:hover {
+    background: linear-gradient(135deg, #004d40, #00796b);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+

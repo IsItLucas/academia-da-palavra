@@ -1,31 +1,36 @@
-
-/* Reset geral */
+/* ============================
+   Reset e base
+============================ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Body */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-    transition: background 0.5s ease;
+    transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* Container */
+/* ============================
+   Container do login
+============================ */
 .container {
-    background-color: rgba(255, 255, 255, 0.98);
+    background-color: rgba(255,255,255,0.95);
     padding: 50px 40px;
-    border-radius: 30px;
+    border-radius: 25px;
     width: 400px;
     max-width: 90%;
     box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.4s ease;
 }
 
 .container:hover {
@@ -33,125 +38,178 @@ body {
     box-shadow: 0 30px 60px rgba(0,0,0,0.35);
 }
 
-/* Título */
-h2 {
-    text-align: center;
-    margin-bottom: 45px;
-    color: #42bdd3;
-    font-size: 32px;
-    letter-spacing: 1.2px;
+/* ============================
+   Navegação
+============================ */
+nav {
+    align-self: flex-start;
+    margin-bottom: 25px;
 }
 
-/* Inputs e labels flutuantes */
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #69418b;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #a359a0;
+}
+
+/* ============================
+   Título
+============================ */
+h2 {
+    font-size: 2rem;
+    color: #052652;
+    margin-bottom: 35px;
+}
+
+/* ============================
+   Formulário
+============================ */
 form {
-    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 form label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 15px;
-    color: #777;
-    transition: all 0.3s ease;
+    font-size: 14px;
+    color: #555;
 }
 
 form input {
     width: 100%;
-    padding: 16px;
-    border: 2px solid #ccc;
-    border-radius: 14px;
-    outline: none;
+    padding: 14px;
     font-size: 16px;
-    background: rgba(255,255,255,0.95);
-    color: #333;
-    transition: all 0.4s ease;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
 form input:focus {
-    border-color: #00796b;
-    box-shadow: 0 0 12px #00796b, 0 0 20px rgba(0,121,107,0.2);
-    background: rgba(255,255,255,1);
+    border-color: #3a5dcb;
+    box-shadow: 0 0 10px rgba(58,93,203,0.3);
+    background-color: rgba(255,255,255,1);
 }
 
-/* Botão */
-button {
+/* ============================
+   Botão Entrar
+============================ */
+form button[type="submit"] {
     width: 100%;
-    padding: 16px;
-    margin-top: 20px;
-    background: linear-gradient(135deg, #00796b, #004d40);
+    padding: 14px;
+    background: linear-gradient(135deg, #3a5dcb, #69418b);
     color: #fff;
-    border: none;
-    border-radius: 14px;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.4s ease;
     box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
 }
 
-button:hover {
-    background: linear-gradient(135deg, #004d40, #00796b);
+form button[type="submit"]:hover {
+    background: linear-gradient(135deg, #69418b, #3a5dcb);
+    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
-/* Botão modo escuro */
-.dark-mode-btn {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 25px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(135deg, #00796b, #004d40);
-    color: #fff;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-    transition: all 0.4s ease;
-}
-
-.dark-mode-btn:hover {
-    background: linear-gradient(135deg, #004d40, #00796b);
-}
-
-/* Modo escuro */
+/* ============================
+   Modo escuro
+============================ */
 body.dark-mode {
-    background: linear-gradient(135deg, #000000, #1a1a1a);
+    background: linear-gradient(135deg, #0a0a23, #1a1a2e);
     color: #f0f0f0;
 }
 
 body.dark-mode .container {
-    background-color: rgba(25, 25, 25, 0.98);
+    background-color: rgba(25,25,35,0.95);
     box-shadow: 0 30px 60px rgba(0,0,0,0.8);
 }
 
+body.dark-mode h2 {
+    color: #a6c1ff;
+}
+
 body.dark-mode input {
-    border-color: #ffffff;
-    background-color: rgba(40,40,40,0.95);
+    background-color: rgba(40,40,60,0.95);
     color: #f0f0f0;
+    border-color: #555;
 }
 
 body.dark-mode input:focus {
     border-color: #4db6ac;
-    box-shadow: 0 0 15px #4db6ac, 0 0 25px rgba(77,182,172,0.4);
+    box-shadow: 0 0 12px #4db6ac, 0 0 20px rgba(77,182,172,0.3);
 }
 
-body.dark-mode label {
-    color: #29a7ac;
-}
-
-body.dark-mode button {
+body.dark-mode button[type="submit"] {
     background: linear-gradient(135deg, #26a69a, #009688);
-    color: #fff;
     box-shadow: 0 8px 25px rgba(0,0,0,0.6);
 }
 
-body.dark-mode button:hover {
+body.dark-mode button[type="submit"]:hover {
     background: linear-gradient(135deg, #009688, #26a69a);
+    transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.7);
 }
 
-/* Transições suaves */
-input, button, label, .container, .dark-mode-btn {
-    transition: all 0.4s ease;
+body.dark-mode nav a {
+    color: #d3a4ff;
 }
+
+body.dark-mode nav a:hover {
+    color: #ffb6f0;
+}
+
+/* ============================
+   Transições suaves
+============================ */
+input, button, label, .container, nav a {
+    transition: all 0.3s ease;
+}
+
+/* ============================
+   Botão alternar tema
+============================ */
+.dark-mode-btn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #3a5dcb, #69418b);
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.dark-mode-btn:hover {
+    background: linear-gradient(135deg, #69418b, #3a5dcb);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* ============================
+   Botão modo escuro (ativo)
+============================ */
+body.dark-mode .dark-mode-btn {
+    background: linear-gradient(135deg, #26a69a, #009688);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+}
+
+body.dark-mode .dark-mode-btn:hover {
+    background: linear-gradient(135deg, #009688, #26a69a);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+
