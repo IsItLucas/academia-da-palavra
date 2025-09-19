@@ -90,7 +90,6 @@ async function criar_avaliacoes() {
 				<p id="estrelas">${estrelas}</p>
 				<p class="avaliacao-texto">${aval.conteudo}</p>
 				<div class="div_autor">
-					<img src="../img/autores/${aluno.pfp}" alt="Foto do Autor" class="autor_pfp" onclick="abrir_lightbox(this)">
 					<small>${aluno.nome} &blacksquare; ${data}</small>
 				</div>
 			</div>

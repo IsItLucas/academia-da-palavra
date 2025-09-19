@@ -60,6 +60,11 @@
 }
 
 
+p {
+	color: var(--cor-texto-secundario)
+}
+
+
 html {
 	scroll-behavior: smooth;
 	font-size: 100%;
