@@ -88,7 +88,7 @@ export async function registrar_compra(id_aluno, metodo, desconto) {
 export async function cadastrar_endereco(id_aluno, logradouro, numero, complemento, bairro, cidade, estado, cep, pais) {
 	const conexao = await db.conectar();
 
-	const query = "INSERT INTO enderecos(id_aluno, logradouro, numero, complemento, bairro, cidade, estado, cep, pais) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	const query = "INSERT INTO enderecos(id_aluno, logradouro, numero, complemento, bairro, cidade, estado, cep, pais) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	const parametros = [
 		id_aluno,
 		logradouro,

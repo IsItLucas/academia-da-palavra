@@ -28,6 +28,8 @@ function cancel_purchase() {
 async function confirmar_compra() {
 	try {
 		const endereco = await get_endereco();
+		console.log(endereco);
+
 		const resposta_endereco = await fetch(`${URL}/endereco`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -38,6 +40,8 @@ async function confirmar_compra() {
 		}
 
 		const compra = await get_compra();
+		console.log(compra);
+
 		const resposta_compra = await fetch(`${URL}/compra`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
