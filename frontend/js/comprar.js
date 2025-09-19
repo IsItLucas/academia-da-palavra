@@ -27,19 +27,21 @@ function cancel_purchase() {
 
 async function confirmar_compra() {
 	try {
+		const endereco = await get_endereco();
 		const resposta_endereco = await fetch(`${URL}/endereco`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(await get_endereco())
+			body: JSON.stringify(endereco)
 		});
 		if (!resposta_endereco.ok) {
-			throw new Error("Erro ao comprar curso:\n" + resposta_endereco);
+			throw new Error("Erro ao cadastrar endereço:\n" + resposta_endereco);
 		}
 
+		const compra = await get_compra();
 		const resposta_compra = await fetch(`${URL}/compra`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(await get_compra())
+			body: JSON.stringify(compra)
 		});
 		if (!resposta_compra.ok) {
 			throw new Error("Erro ao comprar curso:\n" + resposta_compra);
@@ -105,8 +107,8 @@ async function get_usuario() {
 
 	if (res.ok) {
 		const data = await res.json();
-		console.log(data);
-		console.log("Usuário logado:", data.user);
+		console.log("Usuário logado:", data);
+		return data;
 	} else {
 		console.log("Não autenticado");
 	}

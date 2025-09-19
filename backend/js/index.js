@@ -98,7 +98,7 @@ export async function cadastrar_endereco(id_aluno, logradouro, numero, complemen
 		cidade,
 		estado,
 		cep,
-		pais
+		"Brasil"
 	];
 
 	console.log("Executando:", query, parametros);
