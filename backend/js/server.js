@@ -89,7 +89,7 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.post("/avaliacao", index.autenticar_compra, async (req, res) => {
+app.post("/avaliacao", async (req, res) => {
 	try {
 		const { conteudo, nota } = req.body;
 		await index.enviar_avaliacao(conteudo, nota);
