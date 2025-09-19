@@ -92,7 +92,7 @@ app.get('/logout', (req, res) => {
 app.post("/avaliacao", async (req, res) => {
 	try {
 		const { conteudo, nota } = req.body;
-		await index.enviar_avaliacao(conteudo, nota);
+		await index.enviar_avaliacao(id_aluno, conteudo, nota);
 
 		res.status(201).send(`Avaliação enviada com sucesso como: ${req.session.user.nome} [${req.session.user.id}]`);
 	} catch (err) {
